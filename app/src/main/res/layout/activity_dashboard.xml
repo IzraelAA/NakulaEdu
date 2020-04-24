@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
     android:background="@drawable/lingkaran"
+
+    android:layout_height="match_parent"
     tools:context=".Dashboard">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,18 +17,21 @@
 
         <RelativeLayout
 
+            android:background="@drawable/atas"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="195dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/atas" />
 
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginBottom="0dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="wrap_content"
@@ -41,126 +45,142 @@
                     android:src="@drawable/username" />
 
                 <LinearLayout
-                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
+                        android:layout_marginBottom="2dp"
                         android:text="Panca Adnan Andrian"
                         android:textColor="#FFF"
-                        android:layout_marginBottom="2dp"
                         android:textSize="15dp" />
+
                     <TextView
-                        android:textColor="#FFF"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="335522193"/>
+                        android:text="335522193"
+                        android:textColor="#FFF" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
-
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="-30dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="-40dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
+                android:id="@+id/profilsiswa"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/profilsiswa" />
+                android:background="@drawable/profilsiswa" />
 
-            <ImageView
+            <Button
+                android:id="@+id/absensi"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/absen" />
+                android:background="@drawable/absen" />
 
-            <ImageView
+            <Button
+                android:id="@+id/pelajaransiswa"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/jadwalpelajaran" />
+                android:background="@drawable/jadwalpelajaran" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
+                android:id="@+id/tugas"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/tugas" />
+                android:background="@drawable/tugas" />
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/nilaiharian" />
+                android:background="@drawable/nilaiharian" />
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/rapot" />
+                android:background="@drawable/rapot" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
-            <ImageView
+            <Button
                 android:layout_width="wrap_content"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:src="@drawable/chat" />
+                android:background="@drawable/chat" />
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/notifikasi" />
+                android:background="@drawable/notifikasi" />
 
-            <ImageView
+            <Button
+                android:id="@+id/mapel"
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/jadwalpelajaran" />
+                android:background="@drawable/mapel" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="120dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                android:src="@drawable/kantin" />
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/kantin" />
+
+
+            <Button
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/tagihan" />
+                android:background="@drawable/tagihan" />
 
-            <ImageView
+            <Button
+                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/video" />
+                android:background="@drawable/video" />
         </TableRow>
     </LinearLayout>
 
