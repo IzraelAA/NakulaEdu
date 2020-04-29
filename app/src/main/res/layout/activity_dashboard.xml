@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,6 @@
     tools:context=".Dashboard">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -51,6 +51,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="50dp"
@@ -60,6 +61,7 @@
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/nis"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="335522193"
@@ -132,6 +134,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/chat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -146,6 +149,7 @@
                 android:background="@drawable/notifikasi" />
 
             <Button
+
                 android:id="@+id/mapel"
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"

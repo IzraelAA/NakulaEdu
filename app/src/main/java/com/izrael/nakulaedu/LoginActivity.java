@@ -1,17 +1,36 @@
 package com.izrael.nakulaedu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.izrael.nakulaedu.model.GetAuth;
+import com.izrael.nakulaedu.rest.ApiClient;
+import com.izrael.nakulaedu.rest.ApiInterface;
+import com.izrael.nakulaedu.session.SessionManager;
+
+import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText inputNis, inputPassword;
-    Button Login;
+    Button            Login;
+    SessionManager    session;
+    DatabaseReference reference;
+    ApiInterface      mApiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +40,9 @@ public class LoginActivity extends AppCompatActivity {
         inputNis = findViewById(R.id.inputNis);
         inputPassword = findViewById(R.id.inputPassword);
 
+        session = new SessionManager(LoginActivity.this);
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        cek();
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,14 +50,67 @@ public class LoginActivity extends AppCompatActivity {
                 String password;
                 nis = inputNis.getText().toString();
                 password = inputPassword.getText().toString();
-                if (!password.equals("Testing")){
-                    inputPassword.setError("Password Salah");
-                }else if (!nis.equals("666666")){
-                    inputNis.setError("NIS Salah");
-                }else {
-                    Intent intent = new Intent(LoginActivity.this, Dashboard.class);
-                    startActivity(intent);
+                if (password.equals("")) {
+                    inputPassword.setError("Jangan Di Kosongkan");
+                } else if (nis.equals("")) {
+                    inputNis.setError("Jangan Di Kosongkan");
+                } else {
+                    send_login();
                 }
+            }
+        });
+    }
+
+    private void cek() {
+        if (session.is_loggedin()) {
+            Intent intent = new Intent(LoginActivity.this, Dashboard.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private void send_login() {
+        Call<GetAuth> getPelanggan = mApiInterface.getPelanggan(inputNis.getText().toString(), inputPassword.getText().toString());
+        getPelanggan.enqueue(new Callback<GetAuth>() {
+            @Override
+            public void onResponse(Call<GetAuth> call, final Response<GetAuth> response) {
+                int code = response.body().getCode();
+                if (code == 200) {
+                    reference = FirebaseDatabase.getInstance().getReference("Users").child(response.body().getPelanggan().getid_siswa());
+                    HashMap<String, String> hashmap = new HashMap<>();
+                    hashmap.put("id", response.body().getPelanggan().getid_siswa());
+                    hashmap.put("username", response.body().getPelanggan().getNama());
+                    hashmap.put("imageUrl", "default");
+                    hashmap.put("status", "offline");
+                    hashmap.put("search", response.body().getPelanggan().getNama().toLowerCase());
+                    reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Masuk", Toast.LENGTH_SHORT).show();
+                                session.set_ID_SISWA(response.body().getPelanggan().getid_siswa());
+                                session.set_NISN(response.body().getPelanggan().getNISN());
+                                session.set_nik(response.body().getPelanggan().getNik());
+                                session.set_nama(response.body().getPelanggan().getNama());
+                                session.set_TELPON(response.body().getPelanggan().gettelepon());
+                                session.set_ID_JENIS_KELAMIN(response.body().getPelanggan().getid_jenis_kelamin());
+                                session.set_is_loggedin();
+                                cek();
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                } else {
+                    String message = response.body().getMessage();
+                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetAuth> call, Throwable t) {
+                Log.e("Retrofit Gets", t.toString());
             }
         });
     }

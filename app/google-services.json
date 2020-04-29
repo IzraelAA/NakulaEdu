@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "933376546614",
+    "firebase_url": "https://nakula-edu.firebaseio.com",
+    "project_id": "nakula-edu",
+    "storage_bucket": "nakula-edu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933376546614:android:b6041b55ef3b8f4f874597",
+        "android_client_info": {
+          "package_name": "com.izrael.nakulaedu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933376546614-p94jnvlfbd6g44idv2kqrvkevfgoc2mr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.izrael.nakulaedu",
+            "certificate_hash": "61e454be4d7a9fa26924dc8abcc6492ab252254b"
+          }
+        },
+        {
+          "client_id": "933376546614-qlvf9dtjj8bpulm0ijfh5atjmfa0bq83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9eRrozpiazkuqa9ZdjhNrSBeW6J2vb6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933376546614-qlvf9dtjj8bpulm0ijfh5atjmfa0bq83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
