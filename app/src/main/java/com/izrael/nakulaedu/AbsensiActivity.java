@@ -15,12 +15,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.*;
@@ -35,12 +37,21 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
 
 import java.io.File;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AbsensiActivity extends AppCompatActivity {
     public static final  int    MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -52,6 +63,9 @@ public class AbsensiActivity extends AppCompatActivity {
     private static final int         CAMERA_REQUEST_CODE           = 7777;
     CircleImageView imageView;
     Button          upload, ambilgambar;
+    public final static String BASE_URL = "http://siakad.nakula.co.id/";
+    public static final int REQUEST_IMAGE = 100;
+    Uri uri;
     ProgressBar pg;
     SessionManager sessionManager;
     private StorageReference StorageRef;
@@ -116,17 +130,7 @@ public class AbsensiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 upload.setEnabled(false);
                 pg.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        upload.setEnabled(true);
-                        pg.setVisibility(View.GONE);
-                        Toast.makeText(AbsensiActivity.this, "Sukses", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AbsensiActivity.this, Dashboard.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 1500);
+                uploadFile(uri);
             }
         });
         ambilgambar.setOnClickListener(new View.OnClickListener() {
@@ -144,47 +148,43 @@ public class AbsensiActivity extends AppCompatActivity {
         MimeTypeMap     mimeTypeMap     = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
-    private void Upload() {
-        final ProgressDialog pd = new ProgressDialog(AbsensiActivity.this);
-        pd.setMessage("Uploading");
-        pd.show();
+    private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
+        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            return contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            return cursor.getString(idx);
+        }
+    }
+    void uploadFile(Uri contentURI){
 
-        final StorageReference fileRefrence = StorageRef.child(System.currentTimeMillis()
-                + "." + getFileExtenstion(imageUrl));
-        uploadTask = fileRefrence.putFile(imageUrl);
-        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+        String filePath = getRealPathFromURIPath(contentURI,AbsensiActivity.this);
+        File file = new File(filePath);
+        Log.d("File",""+file.getName());
+
+        RequestBody mFile = RequestBody.create(MediaType.parse("image/*"),file); //membungkus file ke dalam request body
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file",file.getName(),mFile); // membuat formdata multipart berisi request body
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        ApiInterface service = retrofit.create(ApiInterface.class);
+        Call<RequestBody> uploadGambar = service.uploadGambar(body);
+        uploadGambar.enqueue(new Callback<RequestBody>() {
             @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot>task) throws Exception {
-                if (!task.isSuccessful()){
-                    throw  task.getException();
-                }
-                return fileRefrence.getDownloadUrl();
+            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+
             }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+
             @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()){
-                    Uri donwloadUri = task.getResult();
-                    String uris = donwloadUri.toString();
-//                    reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-//                    HashMap<String , Object> map = new HashMap<>();
-//                    map.put("imageUrl",uris);
-//                    reference.updateChildren(map);
-                    pd.dismiss();
-                }else {
-                    pd.dismiss();
-                    Toast.makeText(AbsensiActivity.this, "Ada Kesalahan", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(AbsensiActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                pd.dismiss();
+            public void onFailure(Call<RequestBody> call, Throwable t) {
+
             }
         });
     }
-
     private void showSettingsAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(AbsensiActivity.this).create();
         alertDialog.setTitle("Alert");
@@ -219,6 +219,7 @@ public class AbsensiActivity extends AppCompatActivity {
                 if (resultCode == Activity.RESULT_OK) {
                     // result code sama, save gambar ke bitmap
                     Bitmap bitmap;
+                    uri = data.getData();
                     bitmap = (Bitmap) data.getExtras().get("data");
                     imageView.setImageBitmap(bitmap);
                 }
