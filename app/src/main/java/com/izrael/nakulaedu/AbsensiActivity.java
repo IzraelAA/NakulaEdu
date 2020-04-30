@@ -219,7 +219,7 @@ public class AbsensiActivity extends AppCompatActivity {
         Log.d(TAG, "onResponse: test");
         File file = mediaFile;
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
-        MultipartBody.Part requestimage = MultipartBody.Part.createFormData("newimage",file.getName(),requestBody);
+        MultipartBody.Part requestimage = MultipartBody.Part.createFormData("fileToUpload",file.getName(),requestBody);
         RequestBody somedata = RequestBody.create(MediaType.parse("text/plain"),"submit");
         Retrofit retrofit = ApiClient.getClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
