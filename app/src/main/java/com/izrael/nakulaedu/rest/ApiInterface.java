@@ -30,7 +30,8 @@ public interface ApiInterface {
 
     @Multipart
     @POST("upload.php")
-    Call<RequestBody> uploadGambar(@Part MultipartBody.Part body);
+    Call<RequestBody> uploadGambar(@Part MultipartBody.Part image,
+                                   @Part ("submit") RequestBody userId);
 
     @FormUrlEncoded
     @POST("api.php")

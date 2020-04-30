@@ -51,6 +51,7 @@ TextView nis,nama;
             @Override
             public void onClick(View v) {
 
+                startActivity(new Intent(Dashboard.this, MainActivity.class));
             }
         });
         profilsiswa.setOnClickListener(new View.OnClickListener() {

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,8 +18,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -37,11 +41,17 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
@@ -54,19 +64,25 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AbsensiActivity extends AppCompatActivity {
-    public static final  int    MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final  String ALLOW_KEY                     = "ALLOWED";
-    public static final  String CAMERA_PREF                   = "camera_pref";
+    public static final  int         MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final  String      ALLOW_KEY                     = "ALLOWED";
+    public static final  String      CAMERA_PREF                   = "camera_pref";
     private              Uri         imageUrl;
     private              StorageTask uploadTask;
     private static final String      TAG                           = AbsensiActivity.class.getSimpleName();
     private static final int         CAMERA_REQUEST_CODE           = 7777;
     CircleImageView imageView;
-    Button          upload, ambilgambar;
-    public final static String BASE_URL = "http://siakad.nakula.co.id/";
-    public static final int REQUEST_IMAGE = 100;
-    Uri uri;
-    ProgressBar pg;
+    int             bitmap_size = 20;
+
+    static File mediaFile;
+    Bitmap          bitmap, decoded;
+    Uri    fileUri;
+    int    max_resolution_image = 200;
+    Button upload, ambilgambar;
+    public final static String BASE_URL       = "http://siakad.nakula.co.id/";
+    public static final int    REQUEST_IMAGE  = 100;
+    public final        int    REQUEST_CAMERA = 0;
+    ProgressBar    pg;
     SessionManager sessionManager;
     private StorageReference StorageRef;
 
@@ -130,61 +146,105 @@ public class AbsensiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 upload.setEnabled(false);
                 pg.setVisibility(View.VISIBLE);
-                uploadFile(uri);
+                uploadFile(decoded);
             }
         });
         ambilgambar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, CAMERA_REQUEST_CODE);
+
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                fileUri = FileProvider.getUriForFile(AbsensiActivity.this, BuildConfig.APPLICATION_ID + ".provider", getOutputMediaFile());
+//                fileUri = getOutputMediaFileUri();
+                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, fileUri);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivityForResult(intent, REQUEST_CAMERA);
             }
         });
     }
 
-    private String getFileExtenstion(Uri uri) {
-        ContentResolver contentResolver = AbsensiActivity.this.getContentResolver();
-        MimeTypeMap     mimeTypeMap     = MimeTypeMap.getSingleton();
-        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
+    public Uri getOutputMediaFileUri() {
+        return Uri.fromFile(getOutputMediaFile());
     }
-    private String getRealPathFromURIPath(Uri contentURI, Activity activity) {
-        Cursor cursor = activity.getContentResolver().query(contentURI, null, null, null, null);
-        if (cursor == null) {
-            return contentURI.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
+
+    private static File getOutputMediaFile() {
+
+        // External sdcard locationthis.getContentResolver().
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "hi");
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.e("Monitoring", "Oops! Failed create Monitoring directory");
+                return null;
+            }
         }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        mediaFile = new File(mediaStorageDir.getPath() + File.separator + "IMG_DeKa" + timeStamp + ".jpg");
+
+        return mediaFile;
     }
-    void uploadFile(Uri contentURI){
 
-        String filePath = getRealPathFromURIPath(contentURI,AbsensiActivity.this);
-        File file = new File(filePath);
-        Log.d("File",""+file.getName());
+    private String getRealPathFromURIPath(Uri contentURI) {
 
-        RequestBody mFile = RequestBody.create(MediaType.parse("image/*"),file); //membungkus file ke dalam request body
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file",file.getName(),mFile); // membuat formdata multipart berisi request body
+        Cursor cursor = this.getContentResolver().query(contentURI, null, null, null, null);
+        String result;
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        ApiInterface service = retrofit.create(ApiInterface.class);
-        Call<RequestBody> uploadGambar = service.uploadGambar(body);
-        uploadGambar.enqueue(new Callback<RequestBody>() {
+        // for API 19 and above
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+
+            cursor.moveToFirst();
+            String image_id = cursor.getString(0);
+            image_id = image_id.substring(image_id.lastIndexOf(":") + 1);
+            cursor.close();
+
+            cursor = this.getContentResolver().query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
+
+        }
+        if( cursor != null && cursor.moveToFirst() ){
+            result = cursor.getString(cursor.getColumnIndex("ContactNumber"));
+            cursor.close();
+        }
+        result = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+        cursor.close();
+        return result;
+    }
+
+    void uploadFile(Bitmap gambarbitmap) {
+
+        Log.d(TAG, "onResponse: test");
+        File file = mediaFile;
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
+        MultipartBody.Part requestimage = MultipartBody.Part.createFormData("newimage",file.getName(),requestBody);
+        RequestBody somedata = RequestBody.create(MediaType.parse("text/plain"),"submit");
+        Retrofit retrofit = ApiClient.getClient();
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+        Call call = apiInterface.uploadGambar(requestimage,somedata);
+        call.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-
+            public void onResponse(Call call, Response response) {
+                upload.setEnabled(true);
+                pg.setVisibility(View.GONE);
+                Log.d(TAG, "onResponse: sukses");
+//                Toast.makeText(AbsensiActivity.this, response+"sukse", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<RequestBody> call, Throwable t) {
+            public void onFailure(Call call, Throwable t) {
 
+                upload.setEnabled(true);
+                pg.setVisibility(View.GONE);
+                Log.d(TAG, "onResponse: gagal"+t);
             }
         });
+
+
     }
+
     private void showSettingsAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(AbsensiActivity.this).create();
         alertDialog.setTitle("Alert");
@@ -211,20 +271,48 @@ public class AbsensiActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+        int width  = image.getWidth();
+        int height = image.getHeight();
+
+        float bitmapRatio = (float) width / (float) height;
+        if (bitmapRatio > 1) {
+            width = maxSize;
+            height = (int) (width / bitmapRatio);
+        } else {
+            height = maxSize;
+            width = (int) (height * bitmapRatio);
+        }
+        return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case (CAMERA_REQUEST_CODE):
-                if (resultCode == Activity.RESULT_OK) {
-                    // result code sama, save gambar ke bitmap
-                    Bitmap bitmap;
-                    uri = data.getData();
-                    bitmap = (Bitmap) data.getExtras().get("data");
-                    imageView.setImageBitmap(bitmap);
+        Log.e("onActivityResult", "requestCode " + requestCode + ", resultCode " + resultCode);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CAMERA) {
+                try {
+                    Log.d("CAMERA", fileUri.getPath());
+                    bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
+                    setToImageView(getResizedBitmap(bitmap, max_resolution_image));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                break;
+            }
+
         }
+    }
+
+    private void setToImageView(Bitmap bmp) {
+        //compress image
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, bytes);
+        decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(bytes.toByteArray()));
+
+        //menampilkan gambar yang dipilih dari camera/gallery ke ImageView
+        imageView.setImageBitmap(decoded);
     }
 
     private void showAlert() {
