@@ -223,7 +223,7 @@ public class AbsensiActivity extends AppCompatActivity {
         RequestBody somedata = RequestBody.create(MediaType.parse("text/plain"),"submit");
         Retrofit retrofit = ApiClient.getClient();
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call call = apiInterface.uploadGambar(requestimage,"submit");
+        Call call = apiInterface.uploadGambar(requestimage,somedata);
         call.enqueue(new Callback() {
             @Override
             public void onResponse(Call call, Response response) {
