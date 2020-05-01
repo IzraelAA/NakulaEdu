@@ -19,6 +19,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,8 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.*;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,6 +44,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.izrael.nakulaedu.model.PhotoUploadModel;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
@@ -51,36 +57,42 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AbsensiActivity extends AppCompatActivity {
+public class AbsensiActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks{
     public static final  int         MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final  String      ALLOW_KEY                     = "ALLOWED";
     public static final  String      CAMERA_PREF                   = "camera_pref";
+    private static File mediaStorageDir;
     private              Uri         imageUrl;
     private              StorageTask uploadTask;
     private static final String      TAG                           = AbsensiActivity.class.getSimpleName();
     private static final int         CAMERA_REQUEST_CODE           = 7777;
     CircleImageView imageView;
     int             bitmap_size = 20;
-
     static File mediaFile;
     Bitmap          bitmap, decoded;
     Uri    fileUri;
+    String longtitude;
     int    max_resolution_image = 200;
     Button upload, ambilgambar;
     public final static String BASE_URL       = "http://siakad.nakula.co.id/";
     public static final int    REQUEST_IMAGE  = 100;
+    public static final int    REQUEST_IMAGE111  = 100;
+    public static final int    REQUEST_IMAGE222  = 100;
     public final        int    REQUEST_CAMERA = 0;
     ProgressBar    pg;
     SessionManager sessionManager;
@@ -123,6 +135,26 @@ public class AbsensiActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imgphoto);
         ambilgambar = findViewById(R.id.ambilgambar);
         pg = findViewById(R.id.pg);
+
+        if(EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            upload.setEnabled(true);
+        }else{
+            EasyPermissions.requestPermissions(this,"Izinkan Aplikasi Mengakses Storage?",REQUEST_IMAGE,Manifest.permission.READ_EXTERNAL_STORAGE);
+            upload.setEnabled(false);
+        }
+        if(EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            upload.setEnabled(true);
+        }else{
+            EasyPermissions.requestPermissions(this,"Izinkan Aplikasi Mengakses Storage?",REQUEST_IMAGE111,Manifest.permission.ACCESS_FINE_LOCATION);
+            upload.setEnabled(false);
+        }
+
+        if(EasyPermissions.hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            upload.setEnabled(true);
+        }else{
+            EasyPermissions.requestPermissions(this,"Izinkan Aplikasi Mengakses Storage?",REQUEST_IMAGE222,Manifest.permission.ACCESS_COARSE_LOCATION);
+            upload.setEnabled(false);
+        }
         sessionManager = new SessionManager(AbsensiActivity.this);
         StorageRef = FirebaseStorage.getInstance().getReference("uploads");
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -141,6 +173,18 @@ public class AbsensiActivity extends AppCompatActivity {
                 }
             }
         }
+        FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(AbsensiActivity.this);
+        mFusedLocation.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations this can be null.
+                        if (location != null) {
+                            longtitude = String.valueOf(location.getLongitude() + location.getLatitude());
+                            // Logic to handle location object
+                        }
+                    }
+                });
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,7 +215,7 @@ public class AbsensiActivity extends AppCompatActivity {
     private static File getOutputMediaFile() {
 
         // External sdcard locationthis.getContentResolver().
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "hi");
+        mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "hi");
 
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
@@ -213,35 +257,40 @@ public class AbsensiActivity extends AppCompatActivity {
         cursor.close();
         return result;
     }
-
     void uploadFile(Bitmap gambarbitmap) {
 
-        Log.d(TAG, "onResponse: test");
         File file = mediaFile;
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"),file);
-        MultipartBody.Part requestimage = MultipartBody.Part.createFormData("fileToUpload",file.getName(),requestBody);
-        RequestBody somedata = RequestBody.create(MediaType.parse("text/plain"),"submit");
-        Retrofit retrofit = ApiClient.getClient();
-        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
-        Call call = apiInterface.uploadGambar(requestimage,somedata);
-        call.enqueue(new Callback() {
+
+
+        Log.d("File",""+file.getName());
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        ApiInterface service = retrofit.create(ApiInterface.class);
+        Call<ResponseBody> uploadGambar = service.uploadGambar(sessionManager.get_NISN(),longtitude,file.getName(),"h");
+        uploadGambar.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call call, Response response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
-                Log.d(TAG, "onResponse: sukses");
-//                Toast.makeText(AbsensiActivity.this, response+"sukse", Toast.LENGTH_SHORT).show();
+                Toast.makeText(AbsensiActivity.this,"Sukses..!!!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AbsensiActivity.this,Dashboard.class);
+                startActivity(intent);
             }
-
             @Override
-            public void onFailure(Call call, Throwable t) {
-
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
-                Log.d(TAG, "onResponse: gagal"+t);
+                Log.d(TAG, "onFailure: "+ t);
+                Toast.makeText(AbsensiActivity.this,"Terabsen..!!!",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(AbsensiActivity.this,Dashboard.class);
+                startActivity(intent);
             }
         });
-
 
     }
 
@@ -294,7 +343,7 @@ public class AbsensiActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 try {
-                    Log.d("CAMERA", fileUri.getPath());
+                    Log.d("CAMERACAMERA", fileUri.getPath());
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(fileUri));
                     setToImageView(getResizedBitmap(bitmap, max_resolution_image));
                 } catch (Exception e) {
@@ -369,5 +418,15 @@ public class AbsensiActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+
     }
 }

@@ -3,6 +3,7 @@ package com.izrael.nakulaedu.rest;
 
 import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
+import com.izrael.nakulaedu.model.PhotoUploadModel;
 
 import java.util.Map;
 
@@ -28,10 +29,14 @@ public interface ApiInterface {
             @Field("password") String password
     );
 
-    @Multipart
+    @FormUrlEncoded
     @POST("upload.php")
-    Call<RequestBody> uploadGambar(@Part MultipartBody.Part fileToUpload,
-                                   @Part ("submit") RequestBody userId);
+    Call<ResponseBody> uploadGambar(
+            @Field("nis") String nis,
+            @Field("location") String location,
+            @Field("url_gambar") String url_gambar,
+            @Field("kode_kehadiran") String kode_kehadiran
+    );
 
     @FormUrlEncoded
     @POST("api.php")
