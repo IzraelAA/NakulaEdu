@@ -83,6 +83,6 @@
         app:zee_animDuration="300"
         app:zee_distanceMultiplier="4"
         app:zee_dotsRadius="24dp"
-        app:zee_firstDotsColor="#FFF"
-        app:zee_secondDotsColor="#000"/>
+        app:zee_firstDotsColor="#3454FE"
+        app:zee_secondDotsColor="#00BCD4"/>
 </LinearLayout>
