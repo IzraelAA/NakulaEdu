@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">Nakula Edu</string>
+    <string-array name="data_nama">
+        <item>Matematika</item>
+        <item>Ilmu Pengetahuan Alam</item>
+        <item>Bahasa Inggris</item>
+        <item>Bahasa Indonesia</item>
+        <item>Bahasa Daerah</item>
+        <item>Ilmu Pengetahuan Sosial</item>
+        <item>Agama</item>
+    </string-array>
+    <string-array name="hari">
+    <item>Senin</item>
+    <item>Selesa</item>
+    <item>Rabu</item>
+    <item>Kamis</item>
+    <item>Jumat</item>
+    <item>Sabtu</item>
+    <item>Minggu</item>
+</string-array>
+    <string-array name="data_nilai">
+        <item>90</item>
+        <item>98</item>
+        <item>95</item>
+        <item>88</item>
+        <item>85</item>
+        <item>81</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="data_guru">
+        <item>Sambudi S.pd</item>
+        <item>Sumiya S.pd</item>
+        <item>Yayudi S.pd</item>
+        <item>Suliswati S.pd</item>
+        <item>Tayeb Iskandar S.pd</item>
+        <item>Izrael Adnan assegaf S.pd</item>
+        <item>Ayu Nilna Amadila S.pd</item>
+    </string-array>
+
+
 </resources>

@@ -3,6 +3,8 @@ package com.izrael.nakulaedu.rest;
 
 import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
+import com.izrael.nakulaedu.model.GetJadwal;
+import com.izrael.nakulaedu.model.GetTahun;
 import com.izrael.nakulaedu.model.PhotoUploadModel;
 
 import java.util.Map;
@@ -13,6 +15,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -36,6 +39,20 @@ public interface ApiInterface {
             @Field("location") String location,
             @Field("url_gambar") String url_gambar,
             @Field("kode_kehadiran") String kode_kehadiran
+    );
+
+    @FormUrlEncoded
+    @POST("api/api_tahun.php")
+    Call<GetTahun> api_tahun(
+            @Field("tahun") String tahun
+    );
+
+    @FormUrlEncoded
+    @POST("api/api_jadwal.php")
+    Call<GetJadwal> jadwal(
+            @Field("nis") String nis,
+            @Field("kode_kelas") String kode_kelas,
+            @Field("tahun") String tahun
     );
 
     @FormUrlEncoded

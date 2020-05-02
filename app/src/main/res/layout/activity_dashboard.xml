@@ -114,6 +114,7 @@
                 android:background="@drawable/tugas" />
 
             <Button
+                android:id="@+id/nilaiharian"
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -121,6 +122,7 @@
                 android:background="@drawable/nilaiharian" />
 
             <Button
+                android:id="@+id/raport"
                 android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

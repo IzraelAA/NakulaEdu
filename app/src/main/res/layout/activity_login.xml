@@ -74,4 +74,15 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:text="Masuk" />
+    <com.agrawalsuneet.dotsloader.loaders.ZeeLoader
+        android:id="@+id/zee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        app:zee_animDuration="300"
+        app:zee_distanceMultiplier="4"
+        app:zee_dotsRadius="24dp"
+        app:zee_firstDotsColor="#FFF"
+        app:zee_secondDotsColor="#000"/>
 </LinearLayout>

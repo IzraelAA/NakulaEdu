@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    android:elevation="6dp"
+    app:cardCornerRadius="6dp"
+    app:cardBackgroundColor="#FFF"
+    android:orientation="horizontal">
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/photonilai"
+        android:layout_marginVertical="5dp"
+        android:src="@drawable/username"
+        android:layout_width="55dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="55dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/guru"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Guru : Sumiya"/>
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/nilai1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nilai : 90"/>
+        <TextView
+            android:textColor="#000"
+            android:id="@+id/pelajaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pelajaran : Ilmu Pengetahuan Alam"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

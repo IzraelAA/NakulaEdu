@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
 import com.izrael.nakulaedu.session.SessionManager;
 
 public class Dashboard extends AppCompatActivity {
-    Button profilsiswa, absensi, pelajaransiswa, tugas, mapel,chat;
+    Button profilsiswa, absensi, pelajaransiswa, tugas, mapel,chat,nilaiharian;
 TextView nis,nama;
     SessionManager session;
 
@@ -28,6 +29,7 @@ TextView nis,nama;
         tugas = findViewById(R.id.tugas);
         mapel = findViewById(R.id.mapel);
         chat = findViewById(R.id.chat);
+        nilaiharian = findViewById(R.id.nilaiharian);
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +46,13 @@ TextView nis,nama;
         pelajaransiswa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Dashboard.this, ProfilSiswaActivity.class));
+                startActivity(new Intent(Dashboard.this, JadwalPelajaran.class));
+            }
+        });
+        nilaiharian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this,NilaiActivity.class));
             }
         });
         tugas.setOnClickListener(new View.OnClickListener() {
