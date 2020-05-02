@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     MassageAdapter     massageAdapter;
     ImageButton        imageButton;
     SessionManager     session;
+    static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";
     ValueEventListener seenListener;
     String             userid;
 
@@ -52,7 +53,6 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         recyclerView = findViewById(R.id.reclerViewmasssage);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -145,7 +145,8 @@ public class ChatActivity extends AppCompatActivity {
                 .child(session.get_ID_SISWA());
         chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     chatRef1.child("id").setValue(session.get_ID_SISWA());
                 }
