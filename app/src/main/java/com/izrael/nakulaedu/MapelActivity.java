@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
- 
+
 import com.izrael.nakulaedu.adapter.MapelAdapter;
 import com.izrael.nakulaedu.classmodel.MapelClass;
 import com.izrael.nakulaedu.model.GetTahun;
