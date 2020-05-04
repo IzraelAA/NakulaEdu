@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     MassageAdapter     massageAdapter;
     ImageButton        imageButton;
     SessionManager     session;
+    static final String ACTION_TIMETRAVEL = "com.example.action.TIMETRAVEL";
     ValueEventListener seenListener;
     String             userid;
 
@@ -52,13 +53,11 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         recyclerView = findViewById(R.id.reclerViewmasssage);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        circleImageView = findViewById(R.id.imageprofilchat);
         textView = findViewById(R.id.text_profilemassage);
         editText = findViewById(R.id.edit_send);
         imageButton = findViewById(R.id.btn_send);
@@ -82,11 +81,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 textView.setText(user.getUsername());
-                if (user.getImageUrl().equals("default")) {
-                    circleImageView.setImageResource(R.mipmap.ic_launcher);
-                } else {
-//                    Glide.with(getApplicationContext()).load(user.getImageUrl()).into(circleImageView);
-                }
+
                 readMassage(session.get_ID_SISWA(), userid, user.getImageUrl());
             }
 
@@ -150,7 +145,8 @@ public class ChatActivity extends AppCompatActivity {
                 .child(session.get_ID_SISWA());
         chatRef1.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (!dataSnapshot.exists()) {
                     chatRef1.child("id").setValue(session.get_ID_SISWA());
                 }

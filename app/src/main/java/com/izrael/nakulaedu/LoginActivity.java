@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(LoginActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         cek();
+        zeeLoader.setVisibility(View.GONE);
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
