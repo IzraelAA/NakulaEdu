@@ -41,14 +41,12 @@ public class JadwalPelajaran extends AppCompatActivity {
     RecyclerView   recyclerView;
     SessionManager sessionManager;
     String stahun;
-    TextView now;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_pelajaran);
         recyclerView = findViewById(R.id.reclerviewjadwal);
         recyclerView.setHasFixedSize(true);
-        now = findViewById(R.id.now);
         recyclerView.setLayoutManager(new LinearLayoutManager(JadwalPelajaran.this));
         results = new ArrayList<>();
         sessionManager = new SessionManager(JadwalPelajaran.this);
@@ -78,7 +76,6 @@ public class JadwalPelajaran extends AppCompatActivity {
         });
     }
     private void ApiJadwal(){
-        now.setText(stahun);
         Call<GetJadwal> uploadGambar = mApiInterface.jadwal(sessionManager.get_NISN(),sessionManager.get_KODEKELAS(),stahun);
         uploadGambar.enqueue(new Callback<GetJadwal>() {
             @Override
