@@ -21,14 +21,18 @@
         android:roundIcon="@drawable/logonakulaedu"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashLoginActivity"
-            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".PdfActivity"></activity>
+        <activity android:name=".TugasActivity" />
+        <activity
+            android:name=".SplashLoginActivity"
+            android:theme="@style/NoActionBar" />
         <activity android:name=".RaportActivity" />
         <activity
             android:name=".NilaiActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".FiturActivity"
-            android:theme="@style/NoActionBar"/>
+        <activity
+            android:name=".FiturActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".MenuchatActivity"
             android:theme="@style/NoActionBar" />

@@ -71,7 +71,7 @@ public class MapelActivity extends AppCompatActivity {
 
                 recyclerView.setAdapter(nilaiAdapter);
 
-                Log.e("TAG", "onkkoResponse: " + response.body().getResult());
+                Log.e("TAG", "onkkoResponse: " + results.get(1).getNamamatapelajaran());
                 Log.d("", "onResponse: " + response.body());
             }
 

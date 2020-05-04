@@ -4,19 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.izrael.nakulaedu.adapter.JadwalPelajaraan;
-import com.izrael.nakulaedu.adapter.NilaiAdapter;
 import com.izrael.nakulaedu.classmodel.Jadwal;
-import com.izrael.nakulaedu.classmodel.Nilai;
 import com.izrael.nakulaedu.model.GetJadwal;
 import com.izrael.nakulaedu.model.GetTahun;
-import com.izrael.nakulaedu.model.Result;
+import com.izrael.nakulaedu.model.JadwalResult;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
@@ -24,15 +19,12 @@ import com.izrael.nakulaedu.session.SessionManager;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import android.widget.*;
 
 public class JadwalPelajaran extends AppCompatActivity {
-    private List<Jadwal> list;
-    private List<Result> results;
+    private List<JadwalResult> results;
     private JadwalPelajaraan nilaiAdapter;
     String[]       name;
     String[]       guru;

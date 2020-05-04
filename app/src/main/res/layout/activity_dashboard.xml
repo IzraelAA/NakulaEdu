@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/lingkaran"
-
     android:layout_height="match_parent"
+
+    android:background="@drawable/lingkaran"
     tools:context=".Dashboard">
 
     <LinearLayout
@@ -17,9 +16,9 @@
 
         <RelativeLayout
 
-            android:background="@drawable/atas"
             android:layout_width="match_parent"
-            android:layout_height="195dp">
+            android:layout_height="195dp"
+            android:background="@drawable/atas">
 
 
             <LinearLayout
@@ -69,6 +68,7 @@
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
+
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="120dp"
@@ -76,26 +76,26 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_margin="5dp"
                 android:id="@+id/profilsiswa"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/profilsiswa" />
 
             <Button
                 android:id="@+id/absensi"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/absen" />
 
             <Button
                 android:id="@+id/pelajaransiswa"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/jadwalpelajaran" />
         </TableRow>
@@ -107,25 +107,25 @@
 
             <Button
                 android:id="@+id/tugas"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/tugas" />
 
             <Button
                 android:id="@+id/nilaiharian"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/nilaiharian" />
 
             <Button
                 android:id="@+id/raport"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/rapot" />
         </TableRow>
@@ -144,18 +144,18 @@
                 android:background="@drawable/chat" />
 
             <Button
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/notifikasi" />
 
             <Button
 
                 android:id="@+id/mapel"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/mapel" />
         </TableRow>
@@ -167,25 +167,25 @@
 
 
             <Button
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/kantin" />
 
 
             <Button
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/tagihan" />
 
             <Button
                 android:id="@+id/vidconverence"
-                android:layout_margin="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/video" />
         </TableRow>

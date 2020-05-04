@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebebeb"
+    android:background="@drawable/backgroundchat"
     android:orientation="vertical"
     tools:context=".JadwalPelajaran">
 
@@ -15,7 +15,6 @@
         app:title="Jadwal Pelajaran"
         app:titleTextColor="#FFF" />
     <androidx.recyclerview.widget.RecyclerView
-        android:background="#ebebeb"
         android:layout_width="match_parent"
         android:id="@+id/reclerviewjadwal"
         tools:listitem="@layout/jadwalpelajaran"

@@ -1,10 +1,9 @@
-
 package com.izrael.nakulaedu.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class Jadwal  {
 
     @SerializedName("kodejdwl")
     @Expose

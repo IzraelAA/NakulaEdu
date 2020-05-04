@@ -6,24 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.izrael.nakulaedu.R;
-import com.izrael.nakulaedu.classmodel.Jadwal;
-import com.izrael.nakulaedu.classmodel.Nilai;
-import com.izrael.nakulaedu.model.Result;
+import com.izrael.nakulaedu.model.Jadwal;
+import com.izrael.nakulaedu.model.JadwalResult;
 
 import android.widget.*;
 
 import java.util.List;
 
 public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.ViewHolder> {
-    List<Result> list;
+    List<JadwalResult> list;
     Context      context;
     int list1 ;
 
-    public JadwalPelajaraan(Context contextt, List<Result> list) {
+    public JadwalPelajaraan(Context contextt, List<JadwalResult> list) {
         this.context = contextt;
         this.list = list;
 
@@ -38,10 +36,10 @@ public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.View
 
     @Override
     public void onBindViewHolder(@NonNull JadwalPelajaraan.ViewHolder holder, int position) {
-        final Result jadwal = list.get(position);
+        final JadwalResult jadwal = list.get(position);
         int angka = +1;
         if (jadwal.getHari().equals("Senin")){
-            holder.background.setBackgroundResource(R.drawable.seninbeckground);
+            holder.background.setBackgroundResource(R.drawable.asenin);
         }
         if (jadwal.getHari().equals("Selasa")){
             holder.background.setBackgroundResource(R.drawable.selasabackground);

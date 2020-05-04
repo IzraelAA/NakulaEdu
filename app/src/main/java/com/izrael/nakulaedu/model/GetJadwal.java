@@ -11,7 +11,7 @@ public class GetJadwal {
     private String message;
     @SerializedName("result")
     @Expose
-    private List<Result> result ;
+    private List<JadwalResult> result ;
 
     public String getMessage() {
         return message;
@@ -21,11 +21,11 @@ public class GetJadwal {
         this.message = message;
     }
 
-    public List<Result> getResult() {
+    public List<JadwalResult> getResult() {
         return result;
     }
 
-    public void setResult(List<Result> result) {
+    public void setResult(List<JadwalResult> result) {
         this.result = result;
     }
 
