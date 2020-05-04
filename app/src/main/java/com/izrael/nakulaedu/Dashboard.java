@@ -18,6 +18,7 @@ TextView nis,nama;
     SessionManager session;
 
     public static final int    REQUEST_IMAGE222  = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,6 @@ TextView nis,nama;
 
         }else{
             EasyPermissions.requestPermissions(this,"Izinkan Aplikasi Mengakses Storage?",REQUEST_IMAGE222,Manifest.permission.ACCESS_COARSE_LOCATION);
-
         }
         nama.setText(session.get_nama());
         videconverence = findViewById(R.id.vidconverence);
