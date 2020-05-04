@@ -6,12 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-
-import com.izrael.nakulaedu.adapter.JadwalPelajaraan;
+ 
 import com.izrael.nakulaedu.adapter.MapelAdapter;
 import com.izrael.nakulaedu.classmodel.MapelClass;
-import com.izrael.nakulaedu.classmodel.Nilai;
-import com.izrael.nakulaedu.model.GetJadwal;
 import com.izrael.nakulaedu.model.GetTahun;
 import com.izrael.nakulaedu.classmodel.Result;
 import com.izrael.nakulaedu.rest.ApiClient;
@@ -37,11 +34,12 @@ public class MapelActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapel);
         results = new ArrayList<>();
-        recyclerView = findViewById(R.id.reclerviewjadwal);
+        recyclerView = findViewById(R.id.recylerviewmapel);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MapelActivity.this));
         sessionManager = new SessionManager(MapelActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        ApiTahun();
     }
 
     private void ApiTahun(){

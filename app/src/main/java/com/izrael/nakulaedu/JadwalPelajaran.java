@@ -97,17 +97,5 @@ public class JadwalPelajaran extends AppCompatActivity {
         });
 
     }
-    private void ListAdd() {
-
-        for (int i = 0; i < name.length; i++) {
-            Jadwal nilai2 = new Jadwal();
-            nilai2.setHari(name[i]);
-            list.add(nilai2);
-        }
-
-        nilaiAdapter = new JadwalPelajaraan(JadwalPelajaran.this,results);
-
-        recyclerView.setAdapter(nilaiAdapter);
-    }
 
 }

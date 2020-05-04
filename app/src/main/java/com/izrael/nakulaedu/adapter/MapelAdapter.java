@@ -36,9 +36,12 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MapelAdapter.ViewHolder holder, int position) {
         Result result = list.get(position);
-        if (result.equals("Teknik komputer Jaringan")){
+        if (result.getNamamatapelajaran().equals("Teknik komputer Jaringan")){
             holder.mapel.setImageResource(R.drawable.agamahindu);
-        }else {
+        }if (result.getNamamatapelajaran().equals("Web Desaign")) {
+            holder.mapel.setImageResource(R.drawable.agamahindu);
+        }
+        else {
             holder.mapel.setImageResource(R.drawable.agamakristen);
         }
     }
