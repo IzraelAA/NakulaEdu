@@ -10,14 +10,14 @@
         <item>Agama</item>
     </string-array>
     <string-array name="hari">
-    <item>Senin</item>
-    <item>Selesa</item>
-    <item>Rabu</item>
-    <item>Kamis</item>
-    <item>Jumat</item>
-    <item>Sabtu</item>
-    <item>Minggu</item>
-</string-array>
+        <item>Senin</item>
+        <item>Selesa</item>
+        <item>Rabu</item>
+        <item>Kamis</item>
+        <item>Jumat</item>
+        <item>Sabtu</item>
+        <item>Minggu</item>
+    </string-array>
     <string-array name="data_nilai">
         <item>90</item>
         <item>98</item>

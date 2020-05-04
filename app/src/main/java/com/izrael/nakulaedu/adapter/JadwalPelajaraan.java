@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.izrael.nakulaedu.R;
@@ -20,7 +21,7 @@ import java.util.List;
 public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.ViewHolder> {
     List<Result> list;
     Context      context;
-
+    int list1 ;
 
     public JadwalPelajaraan(Context contextt, List<Result> list) {
         this.context = contextt;
@@ -38,11 +39,35 @@ public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.View
     @Override
     public void onBindViewHolder(@NonNull JadwalPelajaraan.ViewHolder holder, int position) {
         final Result jadwal = list.get(position);
+        int angka = +1;
         if (jadwal.getHari().equals("Senin")){
-
+            holder.background.setBackgroundResource(R.drawable.seninbeckground);
+        }
+        if (jadwal.getHari().equals("Selasa")){
+            holder.background.setBackgroundResource(R.drawable.selasabackground);
+        }
+        if (jadwal.getHari().equals("Rabu")){
+            holder.background.setBackgroundResource(R.drawable.rabubackground);
+        }
+        if (jadwal.getHari().equals("Kamis")){
+            holder.background.setBackgroundResource(R.drawable.kamisbeckground);
+        }
+        if (jadwal.getHari().equals("Jumat")){
+            holder.background.setBackgroundResource(R.drawable.jumatbackground);
+        }
+        if (jadwal.getHari().equals("Sabtu")){
+            holder.background.setBackgroundResource(R.drawable.sabtubackground);
         }
         holder.hari.setText(jadwal.getHari());
-        holder.hari.setText(jadwal.getJamMulai()+jadwal.getJamSelesai());
+        holder.mapel.setText("Mata pelajaran : "+jadwal.getNamamatapelajaran());
+        holder.mulai.setText("Jam mulai         : "+jadwal.getJamSelesai() );
+        holder.keluar.setText("Jam Selesai      : "+jadwal.getJamMulai() );
+        if (jadwal.getNamaGuru().equals("")){
+            holder.guru.setText("Guru                   : Nama guru tidak tercantum");
+        }else {
+
+            holder.guru.setText("Guru                   : "+jadwal.getNamaGuru());
+        }
     }
 
     @Override
@@ -51,12 +76,16 @@ public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView hari,pelajaran,jam;
-        RecyclerView recyclerView;
+        TextView hari,mulai,keluar,guru,mapel;
+        LinearLayout background;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             hari = itemView.findViewById(R.id.hari);
-            recyclerView = itemView.findViewById(R.id.reclerviewjadwal);
+            mulai = itemView.findViewById(R.id.mulai);
+            keluar = itemView.findViewById(R.id.selesai);
+            guru = itemView.findViewById(R.id.guru);
+            mapel = itemView.findViewById(R.id.mapel);
+            background = itemView.findViewById(R.id.beckground);
         }
     }
 }

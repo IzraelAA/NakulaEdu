@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     SessionManager    session;
     DatabaseReference reference;
     ApiInterface      mApiInterface;
-    ZeeLoader         zeeLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
         Login = findViewById(R.id.buttonlogin);
         inputNis = findViewById(R.id.inputNis);
         inputPassword = findViewById(R.id.inputPassword);
-        zeeLoader = findViewById(R.id.zee);
         session = new SessionManager(LoginActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         cek();
@@ -58,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
                     inputNis.setError("Jangan Di Kosongkan");
                 } else {
                     Login.setEnabled(false);
-                    zeeLoader.setVisibility(View.VISIBLE);
                     send_login();
                 }
             }
@@ -74,56 +71,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void send_login() {
-
-        Call<GetAuth> getPelanggan = mApiInterface.getPelanggan(inputNis.getText().toString(), inputPassword.getText().toString());
-        getPelanggan.enqueue(new Callback<GetAuth>() {
-            @Override
-            public void onResponse(Call<GetAuth> call, final Response<GetAuth> response) {
-                int code = response.body().getCode();
-                if (code == 200) {
-                    reference = FirebaseDatabase.getInstance().getReference("Users").child(response.body().getPelanggan().getid_siswa());
-                    HashMap<String, String> hashmap = new HashMap<>();
-                    hashmap.put("id", response.body().getPelanggan().getid_siswa());
-                    hashmap.put("username", response.body().getPelanggan().getNama());
-                    hashmap.put("imageUrl", "default");
-                    hashmap.put("status", "offline");
-                    hashmap.put("search", response.body().getPelanggan().getNama().toLowerCase());
-                    reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Login.setEnabled(true);
-                                zeeLoader.setVisibility(View.GONE);
-                                Toast.makeText(LoginActivity.this, "Masuk", Toast.LENGTH_SHORT).show();
-                                session.set_ID_SISWA(response.body().getPelanggan().getid_siswa());
-                                session.set_KODEKELAS(response.body().getPelanggan().getKode_kelas());
-                                session.set_NISN(response.body().getPelanggan().getNISN());
-                                session.set_nik(response.body().getPelanggan().getNik());
-                                session.set_TAHUN(response.body().getPelanggan().getAngkatan());
-                                session.set_nama(response.body().getPelanggan().getNama());
-                                session.set_TELPON(response.body().getPelanggan().gettelepon());
-                                session.set_ID_JENIS_KELAMIN(response.body().getPelanggan().getid_jenis_kelamin());
-                                session.set_is_loggedin();
-                                cek();
-                            } else {
-                                Login.setEnabled(true);
-                                zeeLoader.setVisibility(View.GONE);
-                                Toast.makeText(LoginActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                } else {
-                    Login.setEnabled(true);
-                    zeeLoader.setVisibility(View.GONE);
-                    String message = response.body().getMessage();
-                    Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetAuth> call, Throwable t) {
-                Log.e("Retrofit Gets", t.toString());
-            }
-        });
+        Intent intent = new Intent(LoginActivity.this,SplashLoginActivity.class);
+        intent.putExtra("nis",inputNis.getText().toString());
+        intent.putExtra("pass",inputPassword.getText().toString());
+        startActivity(intent);
     }
 }
