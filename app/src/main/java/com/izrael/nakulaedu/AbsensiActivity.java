@@ -73,28 +73,28 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AbsensiActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
-    public static final  int         MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final  String      ALLOW_KEY                     = "ALLOWED";
-    public static final  String      CAMERA_PREF                   = "camera_pref";
-    private static       File        mediaStorageDir;
-    private              Uri         imageUrl;
-    private              StorageTask uploadTask;
-    private static final String      TAG                           = AbsensiActivity.class.getSimpleName();
-    private static final int         CAMERA_REQUEST_CODE           = 7777;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+    private static File mediaStorageDir;
+    private Uri imageUrl;
+    private StorageTask uploadTask;
+    private static final String TAG = AbsensiActivity.class.getSimpleName();
+    private static final int CAMERA_REQUEST_CODE = 7777;
     CircleImageView imageView;
-    int             bitmap_size = 20;
+    int bitmap_size = 20;
     static File mediaFile;
     Bitmap bitmap, decoded;
-    Uri    fileUri;
+    Uri fileUri;
     String longtitude;
-    int    max_resolution_image = 200;
+    int max_resolution_image = 200;
     Button upload, ambilgambar;
-    public final static String BASE_URL         = "http://siakad.nakula.co.id/";
-    public static final int    REQUEST_IMAGE    = 100;
-    public static final int    REQUEST_IMAGE111 = 100;
-    public static final int    REQUEST_IMAGE222 = 100;
-    public final        int    REQUEST_CAMERA   = 0;
-    ProgressBar    pg;
+    public final static String BASE_URL = "http://siakad.nakula.co.id/";
+    public static final int REQUEST_IMAGE = 100;
+    public static final int REQUEST_IMAGE111 = 100;
+    public static final int REQUEST_IMAGE222 = 100;
+    public final int REQUEST_CAMERA = 0;
+    ProgressBar pg;
     SessionManager sessionManager;
     private StorageReference StorageRef;
 
@@ -277,7 +277,7 @@ public class AbsensiActivity extends AppCompatActivity implements EasyPermission
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
-        ApiInterface       service      = retrofit.create(ApiInterface.class);
+        ApiInterface service = retrofit.create(ApiInterface.class);
         Call<ResponseBody> uploadGambar = service.uploadGambar(sessionManager.get_NISN(), longtitude, file.getName(), "h");
         uploadGambar.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -329,7 +329,7 @@ public class AbsensiActivity extends AppCompatActivity implements EasyPermission
     }
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width  = image.getWidth();
+        int width = image.getWidth();
         int height = image.getHeight();
 
         float bitmapRatio = (float) width / (float) height;

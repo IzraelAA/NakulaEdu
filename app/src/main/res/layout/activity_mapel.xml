@@ -13,9 +13,10 @@
         android:background="@drawable/gradianttoolbar"
         app:title="Mata Pelajaran"
         app:titleTextColor="#FFF" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        tools:listitem="@layout/reclerviewmapel"
         android:id="@+id/recylerviewmapel"
-        android:layout_height="match_parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/reclerviewmapel" />
 </LinearLayout>

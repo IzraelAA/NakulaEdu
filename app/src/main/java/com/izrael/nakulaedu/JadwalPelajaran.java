@@ -56,9 +56,6 @@ public class JadwalPelajaran extends AppCompatActivity {
         ApiTahun();
     }
 
-    private void AddList() {
-        name = getResources().getStringArray(R.array.hari);
-    }
     private void ApiTahun(){
         Call<GetTahun> tahun = mApiInterface.api_tahun(sessionManager.get_TAHUN());
         tahun.enqueue(new Callback<GetTahun>() {
@@ -81,10 +78,6 @@ public class JadwalPelajaran extends AppCompatActivity {
             @Override
             public void onResponse(Call<GetJadwal> call, Response<GetJadwal> response) {
                 assert response.body() != null;
-
-
-//                Result result = new Result();
-//                result.setHari();
 
                 results.addAll(response.body().getResult());
 

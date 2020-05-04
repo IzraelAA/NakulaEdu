@@ -1,6 +1,7 @@
 package com.izrael.nakulaedu.rest;
 
 
+import com.izrael.nakulaedu.classmodel.MapelClass;
 import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
 import com.izrael.nakulaedu.model.GetJadwal;
@@ -52,6 +53,14 @@ public interface ApiInterface {
     Call<GetJadwal> jadwal(
             @Field("nis") String nis,
             @Field("kode_kelas") String kode_kelas,
+            @Field("tahun") String tahun
+    );
+    @FormUrlEncoded
+    @POST("api/api_bahan_tugasview.php")
+    Call<MapelClass> mapel(
+            @Field("nis") String nis,
+            @Field("kode_kelas") String kode_kelas,
+            @Field("kode_kurikulum") String kode_kurikulum,
             @Field("tahun") String tahun
     );
 
