@@ -21,7 +21,8 @@
         android:roundIcon="@drawable/logonakulaedu"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PdfActivity"></activity>
+        <activity android:name=".PelajaranActivity"></activity>
+        <activity android:name=".PdfActivity" />
         <activity android:name=".TugasActivity" />
         <activity
             android:name=".SplashLoginActivity"

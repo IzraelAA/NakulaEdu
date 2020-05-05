@@ -17,13 +17,15 @@ public class Pelanggan {
     private String nama;
     @SerializedName("telepon")
     private String telepon;
+    @SerializedName("foto")
+    private String foto;
     @SerializedName("id_jenis_kelamin")
     private String id_jenis_kelamin;
 
     public Pelanggan() {
     }
 
-    public Pelanggan(String id_siswa, String nik, String nama, String NISN, String telepon, String id_jenis_kelamin, String kode_kelas,String angkatan) {
+    public Pelanggan(String id_siswa, String nik, String nama, String NISN, String telepon, String id_jenis_kelamin, String kode_kelas,String angkatan,String foto) {
         this.id_siswa = id_siswa;
         this.kode_kelas = kode_kelas;
         this.nik = nik;
@@ -32,6 +34,7 @@ public class Pelanggan {
         this.angkatan = angkatan;
         this.telepon = telepon;
         this.id_jenis_kelamin = id_jenis_kelamin;
+        this.foto = foto;
     }
 
     public String getKode_kelas() {
@@ -72,6 +75,14 @@ public class Pelanggan {
 
     public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNama() {

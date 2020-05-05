@@ -79,6 +79,7 @@ String nis,pass;
                                 session.set_KODEKELAS(response.body().getPelanggan().getKode_kelas());
                                 session.set_NISN(response.body().getPelanggan().getNISN());
                                 session.set_nik(response.body().getPelanggan().getNik());
+                                session.set_Foto(response.body().getPelanggan().getFoto());
                                 session.set_TAHUN(response.body().getPelanggan().getAngkatan());
                                 session.set_nama(response.body().getPelanggan().getNama());
                                 session.set_TELPON(response.body().getPelanggan().gettelepon());

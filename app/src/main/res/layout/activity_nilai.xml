@@ -11,7 +11,7 @@
 <androidx.appcompat.widget.Toolbar
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:title="Nilai Raport"
+    app:title="Nilai Harian"
     app:titleTextColor="#FFF"
     android:background="@drawable/gradianttoolbar"/>
     <androidx.recyclerview.widget.RecyclerView

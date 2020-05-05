@@ -1,6 +1,7 @@
 package com.izrael.nakulaedu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.izrael.nakulaedu.PelajaranActivity;
 import com.izrael.nakulaedu.R;
 import com.izrael.nakulaedu.classmodel.Result;
 
@@ -38,8 +40,8 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MapelAdapter.ViewHolder holder, int position) {
-        Result result = list.get(position);
+    public void onBindViewHolder(@NonNull final MapelAdapter.ViewHolder holder, int position) {
+        final Result result = list.get(position);
 //        Toast.makeText(context,result.getNamamatapelajaran(),Toast.LENGTH_LONG).show();
         Log.d(TAG, "onBindViewHolder: "+result.getNamamatapelajaran());
         if (result.getNamamatapelajaran().equals("Jaringan Komputer")){
@@ -49,6 +51,14 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
         }else {
             holder.mapel.setImageResource(R.drawable.bahasainggris);
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PelajaranActivity.class);
+                intent.putExtra("kodejadwal",result.getKodejdwl());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

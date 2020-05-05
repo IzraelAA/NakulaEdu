@@ -8,6 +8,7 @@ public class SessionManager {
     private static final String IS_LOGGEDIN = "Pq2jl888JlWUvMOsQqwm";
     private static final String ID_SISWA = "gJXw0aAreyfUMJFbCfFW";
     private static final String TAHUN = "wqj0aAreyfUMJFbCfFW";
+    private static final String FOTO = "fotonwkahlhbdda";
     private static final String NIK = "YxJW6t3KBIPgGYJYLINx";
     private static final String NAMA = "kicfKeG26u1jadrhGNWm";
     private static final String TELPON = "aOgam60gF4ZBKNIX93sz";
@@ -38,6 +39,10 @@ public class SessionManager {
 
     public void set_ID_SISWA(String value){
         spEditor.putString(ID_SISWA, value);
+        spEditor.commit();
+    }
+    public void set_Foto(String value){
+        spEditor.putString(FOTO, value);
         spEditor.commit();
     }
     public void set_NISN(String value){
@@ -72,6 +77,9 @@ public class SessionManager {
 
     public String get_KODEKELAS(){
         return sp.getString(KODEKELAS,"");
+    }
+    public String get_Foto(){
+        return sp.getString(FOTO,"");
     }
     public void set_TAHUN(String value){
         spEditor.putString(TAHUN, value);
