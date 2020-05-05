@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_marginHorizontal="15dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-   android:background="@drawable/asenin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:cardBackgroundColor="#00000000"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="15dp"
     android:layout_marginTop="12dp">
 
+
     <LinearLayout
+        android:background="@drawable/kamisbeckground"
         android:id="@+id/beckground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,4 +64,4 @@
             android:textColor="#FFF"
             android:textStyle="bold" />
     </LinearLayout>
-</LinearLayout>
+</androidx.cardview.widget.CardView>

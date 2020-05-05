@@ -136,6 +136,12 @@ public class AbsensiActivity extends AppCompatActivity implements EasyPermission
         ambilgambar = findViewById(R.id.ambilgambar);
         pg = findViewById(R.id.pg);
 
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+            upload.setEnabled(true);
+        } else {
+            EasyPermissions.requestPermissions(this, "Izinkan Aplikasi Mengakses Storage?", REQUEST_IMAGE, Manifest.permission.CAMERA);
+            upload.setEnabled(false);
+        }
         if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             upload.setEnabled(true);
         } else {

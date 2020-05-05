@@ -37,25 +37,7 @@ public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.View
     @Override
     public void onBindViewHolder(@NonNull JadwalPelajaraan.ViewHolder holder, int position) {
         final JadwalResult jadwal = list.get(position);
-        int angka = +1;
-        if (jadwal.getHari().equals("Senin")){
-            holder.background.setBackgroundResource(R.drawable.asenin);
-        }
-        if (jadwal.getHari().equals("Selasa")){
-            holder.background.setBackgroundResource(R.drawable.selasabackground);
-        }
-        if (jadwal.getHari().equals("Rabu")){
-            holder.background.setBackgroundResource(R.drawable.rabubackground);
-        }
-        if (jadwal.getHari().equals("Kamis")){
-            holder.background.setBackgroundResource(R.drawable.kamisbeckground);
-        }
-        if (jadwal.getHari().equals("Jumat")){
-            holder.background.setBackgroundResource(R.drawable.jumatbackground);
-        }
-        if (jadwal.getHari().equals("Sabtu")){
-            holder.background.setBackgroundResource(R.drawable.sabtubackground);
-        }
+        
         holder.hari.setText(jadwal.getHari());
         holder.mapel.setText("Mata pelajaran : "+jadwal.getNamamatapelajaran());
         holder.mulai.setText("Jam mulai         : "+jadwal.getJamSelesai() );
