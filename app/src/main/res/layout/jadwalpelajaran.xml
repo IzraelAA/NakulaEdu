@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<LinearLayout
     android:layout_marginHorizontal="15dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="5dp"
-    app:cardElevation="10dp"
-    app:cardBackgroundColor="#00FFFFFF"
+   android:background="@drawable/asenin"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="12dp">
@@ -13,9 +11,8 @@
     <LinearLayout
         android:id="@+id/beckground"
         android:layout_width="match_parent"
-        android:layout_height="596dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/asenin"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -65,4 +62,4 @@
             android:textColor="#FFF"
             android:textStyle="bold" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</LinearLayout>
