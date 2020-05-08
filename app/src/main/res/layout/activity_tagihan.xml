@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundchat"
+    android:orientation="vertical"
+    tools:context=".TagihanActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradianttoolbar"
+        app:title="Tagihan"
+        app:titleTextColor="#FFF"/>
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#8ec7F9"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="@dimen/cardview_default_elevation"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="5dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:textSize="20dp"
+                android:textColor="#FFF"
+                android:layout_marginTop="2dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Anda memiliki beberapa tagihan :"/>
+            <TextView
+                android:layout_marginBottom="2dp"
+                android:textColor="#FFF"
+                android:layout_marginTop="2dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. 100.000 seragam sekolah"/>
+            <TextView
+                android:layout_marginBottom="2dp"
+                android:textColor="#FFF"
+                android:layout_marginTop="2dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. 50.000 daftar ulang"/>
+            <TextView
+                android:layout_marginBottom="2dp"
+                android:textColor="#FFF"
+                android:layout_marginTop="2dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rp. 50.000 Iuran sekolah"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:textColor="#FFF"
+        android:text="Bayar"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonbeckgruond"
+        android:layout_marginHorizontal="10dp"
+        />
+</LinearLayout>

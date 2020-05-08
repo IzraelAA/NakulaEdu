@@ -21,9 +21,22 @@
         android:roundIcon="@drawable/logonakulaedu"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PelajaranActivity"></activity>
-        <activity android:name=".PdfActivity" />
-        <activity android:name=".TugasActivity" />
+        <activity android:name=".NotifikasiActivity"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".TagihanActivity"
+            android:theme="@style/NoActionBar"/>
+        <activity
+            android:name=".KantinActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".PelajaranActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".PdfActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".TugasActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".SplashLoginActivity"
             android:theme="@style/NoActionBar" />

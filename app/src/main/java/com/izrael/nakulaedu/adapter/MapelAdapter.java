@@ -24,12 +24,10 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> {
     List<Result> list;
     Context context;
-    int list1 ;
 
     public MapelAdapter(Context contextt, List<Result> list) {
         this.context = contextt;
         this.list = list;
-
     }
 
     @NonNull
@@ -42,7 +40,6 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final MapelAdapter.ViewHolder holder, int position) {
         final Result result = list.get(position);
-//        Toast.makeText(context,result.getNamamatapelajaran(),Toast.LENGTH_LONG).show();
         Log.d(TAG, "onBindViewHolder: "+result.getNamamatapelajaran());
         if (result.getNamamatapelajaran().equals("Jaringan Komputer")){
             holder.mapel.setImageResource(R.drawable.agamahindu);

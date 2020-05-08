@@ -2,6 +2,7 @@ package com.izrael.nakulaedu.rest;
 
 
 import com.izrael.nakulaedu.classmodel.MapelClass;
+import com.izrael.nakulaedu.classmodel.QuizUjian;
 import com.izrael.nakulaedu.model.Bahan;
 import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
@@ -50,12 +51,19 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("api/api_list_tugas.php")
+    Call<QuizUjian> quiz(
+            @Field("kode_kelas") String kode_kelas
+    );
+
+    @FormUrlEncoded
     @POST("api/api_jadwal.php")
     Call<GetJadwal> jadwal(
             @Field("nis") String nis,
             @Field("kode_kelas") String kode_kelas,
             @Field("tahun") String tahun
     );
+
     @FormUrlEncoded
     @POST("api/api_bahan_tugasview.php")
     Call<MapelClass> mapel(
@@ -64,6 +72,7 @@ public interface ApiInterface {
             @Field("kode_kurikulum") String kode_kurikulum,
             @Field("tahun") String tahun
     );
+
     @FormUrlEncoded
     @POST("api/api_bahan_tugas.php")
     Call<Bahan> bahan(

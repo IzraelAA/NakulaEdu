@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.izrael.nakulaedu.R;
 import com.izrael.nakulaedu.classmodel.Nilai;
+import com.izrael.nakulaedu.classmodel.QuizUjian;
+import com.izrael.nakulaedu.classmodel.UjianResult;
 import com.izrael.nakulaedu.fragment.User;
 
 import java.util.List;
@@ -18,11 +20,11 @@ import android.widget.*;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> {
-    List<Nilai> list;
-    Context context;
+    List<UjianResult> list;
+    Context           context;
 
 
-    public NilaiAdapter(Context contextt, List<Nilai> list) {
+    public NilaiAdapter(Context contextt, List<UjianResult> list) {
         this.context = contextt;
         this.list = list;
 
@@ -38,15 +40,15 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final NilaiAdapter.ViewHolder holder, int position) {
-        final Nilai nilai = list.get(position);
+        final UjianResult nilai = list.get(position);
         holder.imageView.setImageResource(R.drawable.username);
         holder.nilai.setText(       "Nilai      : "+nilai.getNilai());
-        holder.guru.setText(        "Guru       : "+nilai.getPengajar());
-        holder.pelajaraan.setText(  "Pelajaraan : "+nilai.getNama());
+        holder.guru.setText(        "Guru       : "+nilai.getKeterangan());
+        holder.pelajaraan.setText(  "Pelajaraan : "+nilai.getKeterangan());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(holder.itemView.getContext(), "Belum bisa melihat detail" + nilai.getNama(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(holder.itemView.getContext(), "Belum bisa melihat detail" + nilai.getNilai(), Toast.LENGTH_SHORT).show();
             }
         });
     }

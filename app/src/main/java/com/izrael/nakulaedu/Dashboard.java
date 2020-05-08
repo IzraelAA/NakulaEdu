@@ -15,7 +15,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class Dashboard extends AppCompatActivity {
-    Button profilsiswa, absensi, pelajaransiswa, tugas, mapel, chat, nilaiharian, videconverence;
+    Button profilsiswa, absensi, pelajaransiswa, tugas, mapel, chat, nilaiharian, videconverence,raport,kantin,tagihan,notifikasi;
     TextView nis, nama;
     SessionManager session;
     CircleImageView circleImageView;
@@ -27,10 +27,14 @@ public class Dashboard extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         profilsiswa = findViewById(R.id.profilsiswa);
         absensi = findViewById(R.id.absensi);
+        raport = findViewById(R.id.raport);
         session = new SessionManager(Dashboard.this);
         nis = findViewById(R.id.nis);
         nama = findViewById(R.id.name);
         circleImageView = findViewById(R.id.fotousername);
+        kantin = findViewById(R.id.kantin);
+        tagihan = findViewById(R.id.tagihan);
+        notifikasi = findViewById(R.id.notifikasi);
         if (session.get_Foto().equals("")){
 
         }else {
@@ -41,7 +45,33 @@ public class Dashboard extends AppCompatActivity {
         } else {
             EasyPermissions.requestPermissions(this, "Izinkan Aplikasi Mengakses Storage?", REQUEST_IMAGE222, Manifest.permission.ACCESS_COARSE_LOCATION);
         }
+        raport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent in = new Intent(Dashboard.this, TugasActivity.class);
+                in.putExtra("Url","http://siakad.nakula.co.id/");
+                startActivity(in);
+            }
+        });
+        kantin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this,KantinActivity.class));
+            }
+        });
+        tagihan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this,TagihanActivity.class));
+            }
+        });
+        notifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this,NotifikasiActivity.class));
+            }
+        });
         nama.setText(session.get_nama());
         videconverence = findViewById(R.id.vidconverence);
         nis.setText(session.get_NISN());
@@ -88,7 +118,9 @@ public class Dashboard extends AppCompatActivity {
         tugas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Dashboard.this, TugasActivity.class));
+                Intent in = new Intent(Dashboard.this, TugasActivity.class);
+                in.putExtra("Url","http://siakad.nakula.co.id/");
+                startActivity(in);
             }
         });
         profilsiswa.setOnClickListener(new View.OnClickListener() {
