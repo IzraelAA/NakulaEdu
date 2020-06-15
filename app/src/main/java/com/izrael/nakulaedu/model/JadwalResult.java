@@ -5,133 +5,99 @@ import com.google.gson.annotations.SerializedName;
 
 public class JadwalResult {
 
-    @SerializedName("kodejdwl")
+    @SerializedName("id_jadwal")
     @Expose
-    private String kodejdwl;
-    @SerializedName("id_tahun_akademik")
+    private Integer idJadwal;
+    @SerializedName("id_kelas")
     @Expose
-    private String idTahunAkademik;
-    @SerializedName("kode_kelas")
+    private Integer idKelas;
+    @SerializedName("id_sekolah")
     @Expose
-    private String kodeKelas;
-    @SerializedName("kode_pelajaran")
+    private Integer idSekolah;
+    @SerializedName("id_mapel")
     @Expose
-    private String kodePelajaran;
-    @SerializedName("kode_ruangan")
+    private Integer idMapel;
+    @SerializedName("id_guru")
     @Expose
-    private String kodeRuangan;
-    @SerializedName("nip")
-    @Expose
-    private String nip;
-    @SerializedName("paralel")
-    @Expose
-    private String paralel;
-    @SerializedName("jadwal_serial")
-    @Expose
-    private String jadwalSerial;
-    @SerializedName("jam_mulai")
-    @Expose
-    private String jamMulai;
-    @SerializedName("jam_selesai")
-    @Expose
-    private String jamSelesai;
+    private Integer idGuru;
     @SerializedName("hari")
     @Expose
     private String hari;
-    @SerializedName("aktif")
+    @SerializedName("masuk")
     @Expose
-    private String aktif;
+    private String masuk;
+    @SerializedName("keluar")
+    @Expose
+    private String keluar;
+    @SerializedName("created_at")
+    @Expose
+    private Object createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private Object updatedAt;
     @SerializedName("nama_kelas")
     @Expose
     private String namaKelas;
-    @SerializedName("namamatapelajaran")
+    @SerializedName("nama_sekolah")
     @Expose
-    private String namamatapelajaran;
+    private String namaSekolah;
+    @SerializedName("logo")
+    @Expose
+    private String logo;
+    @SerializedName("nama_pelajaran")
+    @Expose
+    private String namaPelajaran;
     @SerializedName("nama_guru")
     @Expose
     private String namaGuru;
-    @SerializedName("nama_ruangan")
+    @SerializedName("nik")
     @Expose
-    private String namaRuangan;
+    private String nik;
+    @SerializedName("password")
+    @Expose
+    private String password;
+    @SerializedName("picture")
+    @Expose
+    private String picture;
 
-    public String getKodejdwl() {
-        return kodejdwl;
+    public Integer getIdJadwal() {
+        return idJadwal;
     }
 
-    public void setKodejdwl(String kodejdwl) {
-        this.kodejdwl = kodejdwl;
+    public void setIdJadwal(Integer idJadwal) {
+        this.idJadwal = idJadwal;
     }
 
-    public String getIdTahunAkademik() {
-        return idTahunAkademik;
+    public Integer getIdKelas() {
+        return idKelas;
     }
 
-    public void setIdTahunAkademik(String idTahunAkademik) {
-        this.idTahunAkademik = idTahunAkademik;
+    public void setIdKelas(Integer idKelas) {
+        this.idKelas = idKelas;
     }
 
-    public String getKodeKelas() {
-        return kodeKelas;
+    public Integer getIdSekolah() {
+        return idSekolah;
     }
 
-    public void setKodeKelas(String kodeKelas) {
-        this.kodeKelas = kodeKelas;
+    public void setIdSekolah(Integer idSekolah) {
+        this.idSekolah = idSekolah;
     }
 
-    public String getKodePelajaran() {
-        return kodePelajaran;
+    public Integer getIdMapel() {
+        return idMapel;
     }
 
-    public void setKodePelajaran(String kodePelajaran) {
-        this.kodePelajaran = kodePelajaran;
+    public void setIdMapel(Integer idMapel) {
+        this.idMapel = idMapel;
     }
 
-    public String getKodeRuangan() {
-        return kodeRuangan;
+    public Integer getIdGuru() {
+        return idGuru;
     }
 
-    public void setKodeRuangan(String kodeRuangan) {
-        this.kodeRuangan = kodeRuangan;
-    }
-
-    public String getNip() {
-        return nip;
-    }
-
-    public void setNip(String nip) {
-        this.nip = nip;
-    }
-
-    public String getParalel() {
-        return paralel;
-    }
-
-    public void setParalel(String paralel) {
-        this.paralel = paralel;
-    }
-
-    public String getJadwalSerial() {
-        return jadwalSerial;
-    }
-
-    public void setJadwalSerial(String jadwalSerial) {
-        this.jadwalSerial = jadwalSerial;
-    }
-
-    public String getJamMulai() {
-        return jamMulai;
-    }
-
-    public void setJamMulai(String jamMulai) {
-        this.jamMulai = jamMulai;
-    }
-
-    public String getJamSelesai() {
-        return jamSelesai;
-    }
-
-    public void setJamSelesai(String jamSelesai) {
-        this.jamSelesai = jamSelesai;
+    public void setIdGuru(Integer idGuru) {
+        this.idGuru = idGuru;
     }
 
     public String getHari() {
@@ -142,12 +108,36 @@ public class JadwalResult {
         this.hari = hari;
     }
 
-    public String getAktif() {
-        return aktif;
+    public String getMasuk() {
+        return masuk;
     }
 
-    public void setAktif(String aktif) {
-        this.aktif = aktif;
+    public void setMasuk(String masuk) {
+        this.masuk = masuk;
+    }
+
+    public String getKeluar() {
+        return keluar;
+    }
+
+    public void setKeluar(String keluar) {
+        this.keluar = keluar;
+    }
+
+    public Object getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Object createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Object getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Object updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getNamaKelas() {
@@ -158,12 +148,28 @@ public class JadwalResult {
         this.namaKelas = namaKelas;
     }
 
-    public String getNamamatapelajaran() {
-        return namamatapelajaran;
+    public String getNamaSekolah() {
+        return namaSekolah;
     }
 
-    public void setNamamatapelajaran(String namamatapelajaran) {
-        this.namamatapelajaran = namamatapelajaran;
+    public void setNamaSekolah(String namaSekolah) {
+        this.namaSekolah = namaSekolah;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public String getNamaPelajaran() {
+        return namaPelajaran;
+    }
+
+    public void setNamaPelajaran(String namaPelajaran) {
+        this.namaPelajaran = namaPelajaran;
     }
 
     public String getNamaGuru() {
@@ -174,12 +180,28 @@ public class JadwalResult {
         this.namaGuru = namaGuru;
     }
 
-    public String getNamaRuangan() {
-        return namaRuangan;
+    public String getNik() {
+        return nik;
     }
 
-    public void setNamaRuangan(String namaRuangan) {
-        this.namaRuangan = namaRuangan;
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
 }

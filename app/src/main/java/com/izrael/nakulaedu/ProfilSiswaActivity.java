@@ -16,7 +16,7 @@ public class ProfilSiswaActivity extends AppCompatActivity {
     TextInputLayout name, nis, email, hp;
     SessionManager session;
     Button         Logout;
-    CircleImageView circleImageView;
+    CircleImageView circleImageView,logo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,14 +28,16 @@ public class ProfilSiswaActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         hp = findViewById(R.id.nohp);
         circleImageView = findViewById(R.id.circleImageView);
-        if (session.get_Foto().equals("")){
-
+        logo = findViewById(R.id.gambarsekolah);
+        if (session.get_Foto().equals("default.png")){
+            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
         }else {
-            Glide.with(this).load("http://siakad.nakula.co.id/foto_siswa/"+session.get_Foto()).into(circleImageView);
+            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
         }
+
         name.getEditText().setText(session.get_nama());
         nis.getEditText().setText(session.get_NISN());
-        hp.getEditText().setText(session.get_TELPON());
+        hp.getEditText().setEnabled(false);
         Logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

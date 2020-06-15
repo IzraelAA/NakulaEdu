@@ -4,30 +4,31 @@ package com.izrael.nakulaedu.classmodel;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.izrael.nakulaedu.model.MapelResult;
+import com.izrael.nakulaedu.model.Status;
 
 public class MapelClass {
-
-    @SerializedName("message")
+    @SerializedName("status")
     @Expose
-    private String message;
-    @SerializedName("result")
+    private Status             status;
+    @SerializedName("data")
     @Expose
-    private List<Result> result = null;
+    private List<MapelResult> data = null;
 
-    public String getMessage() {
-        return message;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public List<Result> getResult() {
-        return result;
+    public List<MapelResult> getData() {
+        return data;
     }
 
-    public void setResult(List<Result> result) {
-        this.result = result;
+    public void setData(List<MapelResult> data) {
+        this.data = data;
     }
 
 }

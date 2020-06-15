@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundchat"
+    android:orientation="vertical"
+    tools:context=".QuizActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="#FFF"
+        android:background="@drawable/gradianttoolbar"
+
+        app:title="Quiz"/>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        app:duration="1100"
+        android:id="@+id/shimmer"
+        app:auto_start="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+            <include layout="@layout/placeholderdataquiz"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/dataquiz"
+        android:id="@+id/reclerviewdataquiz"/>
+</LinearLayout>

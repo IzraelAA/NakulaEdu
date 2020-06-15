@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/backgroundchat"
+    tools:context=".DetailNilaiActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradianttoolbar"
+        app:title="Nilai"
+        app:titleTextColor="#FFF"/>
+    <androidx.cardview.widget.CardView
+        android:layout_margin="10dp"
+        app:cardCornerRadius="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+
+            android:layout_marginBottom="2dp"
+            android:background="#00FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/namaguru"
+                android:textColor="#000"
+                android:textSize="20dp"
+                android:layout_margin="5dp"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sumiz"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/namapelajaran"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sumiz"/>
+                <TextView
+                    android:id="@+id/namanilai"
+                    android:textColor="#000"
+                    android:textSize="20dp"
+                    android:textAlignment="center"
+                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sumiz"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/deskripsi"
+                android:textColor="#000"
+                android:textAlignment="gravity"
+                android:layout_margin="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bahasa arab adalah bahasa yang di gunakan oleh bangsa arab tujuan kelas ini supaya siswa bisa membaca menulis menggunakan bahasa arab dengan baik dan benar"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:duration="800">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+            <include layout="@layout/detailnilaiplaceholder"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailrecyler"
+        tools:listitem="@layout/detailnilai"/>
+</LinearLayout>

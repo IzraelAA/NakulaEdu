@@ -4,30 +4,32 @@ package com.izrael.nakulaedu.classmodel;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.izrael.nakulaedu.model.Quiz;
+import com.izrael.nakulaedu.model.Status;
 
 public class QuizUjian {
 
-    @SerializedName("message")
+    @SerializedName("status")
     @Expose
-    private String message;
-    @SerializedName("result")
+    private Status     status;
+    @SerializedName("data")
     @Expose
-    private List<UjianResult> result = null;
+    private List<Quiz> data = null;
 
-    public String getMessage() {
-        return message;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public List<UjianResult> getResult() {
-        return result;
+    public List<Quiz> getData() {
+        return data;
     }
 
-    public void setResult(List<UjianResult> result) {
-        this.result = result;
+    public void setData(List<Quiz> data) {
+        this.data = data;
     }
 
 }

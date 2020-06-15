@@ -21,10 +21,33 @@
         android:roundIcon="@drawable/logonakulaedu"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NotifikasiActivity"
-            android:theme="@style/NoActionBar"></activity>
-        <activity android:name=".TagihanActivity"
-            android:theme="@style/NoActionBar"/>
+        <activity
+            android:name=".NewActivity"
+            android:label="@string/title_activity_new"
+            android:theme="@style/NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".DetailRaportActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".NilaiRaportActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".IdQuizActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".QuizActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".DetailNilaiActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".NotifikasiActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".TagihanActivity"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".KantinActivity"
             android:theme="@style/NoActionBar" />
@@ -39,11 +62,14 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".SplashLoginActivity"
+            android:theme="@style/NoActionBar" >
+        </activity>
+        <activity
+            android:name=".RaportActivity"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".RaportActivity" />
         <activity
             android:name=".NilaiActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".FiturActivity"
             android:theme="@style/NoActionBar" />
@@ -74,13 +100,22 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="15dp"
+    android:layout_marginHorizontal="5dp"
+    app:cardCornerRadius="6dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/nomer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:background="#dddddd"
+            android:layout_marginHorizontal="5dp"
+            android:textStyle="bold"
+            android:textColor="#000"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:background="#dddddd"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/namaquiz"/>
+            <EditText
+                android:layout_marginTop="5dp"
+                android:background="#dddddd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/dataquiz"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
