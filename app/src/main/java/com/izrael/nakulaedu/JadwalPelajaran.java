@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.izrael.nakulaedu.adapter.JadwalPelajaraan;
 import com.izrael.nakulaedu.classmodel.Jadwal;
 import com.izrael.nakulaedu.model.GetJadwal;
@@ -32,52 +34,41 @@ public class JadwalPelajaran extends AppCompatActivity {
     ApiInterface   mApiInterface;
     RecyclerView   recyclerView;
     SessionManager sessionManager;
+    ShimmerFrameLayout shimmerFrameLayout;
     String stahun;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jadwal_pelajaran);
         recyclerView = findViewById(R.id.reclerviewjadwal);
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmerAnimation();
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(JadwalPelajaran.this));
         results = new ArrayList<>();
         sessionManager = new SessionManager(JadwalPelajaran.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-//        AddList();
+        ApiJadwal();
 //        ListAdd();
-        ApiTahun();
     }
 
-    private void ApiTahun(){
-        Call<GetTahun> tahun = mApiInterface.api_tahun(sessionManager.get_TAHUN());
-        tahun.enqueue(new Callback<GetTahun>() {
-            @Override
-            public void onResponse(Call<GetTahun> call, Response<GetTahun> response) {
-
-                stahun = response.body().getResult();
-                ApiJadwal();
-            }
-
-            @Override
-            public void onFailure(Call<GetTahun> call, Throwable t) {
-
-            }
-        });
-    }
     private void ApiJadwal(){
-        Call<GetJadwal> uploadGambar = mApiInterface.jadwal(sessionManager.get_NISN(),sessionManager.get_KODEKELAS(),stahun);
+        Call<GetJadwal> uploadGambar = mApiInterface.jadwal(Integer.parseInt(sessionManager.get_KODEKELAS()));
         uploadGambar.enqueue(new Callback<GetJadwal>() {
             @Override
             public void onResponse(Call<GetJadwal> call, Response<GetJadwal> response) {
                 assert response.body() != null;
 
-                results.addAll(response.body().getResult());
+                results.addAll(response.body().getData());
 
                 nilaiAdapter = new JadwalPelajaraan(JadwalPelajaran.this,results);
 
+                shimmerFrameLayout.setVisibility(View.GONE);
+                shimmerFrameLayout.stopShimmerAnimation();
                 recyclerView.setAdapter(nilaiAdapter);
 
-                Log.e("TAG", "onkkoResponse: "+response.body().getResult());
+                Log.e("TAG", "onkkoResponse: "+response.body().getData());
                 Log.d("", "onResponse: "+response.body());
             }
             @Override

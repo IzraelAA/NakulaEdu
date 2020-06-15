@@ -1,8 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<ImageView android:id="@+id/mapelgambar"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/fisika"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    android:layout_marginVertical="10dp"
+    android:layout_marginLeft="20dp"
+    app:cardCornerRadius="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="75dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="75dp"
+            android:id="@+id/gurufoto"
+            android:src="@drawable/username" />
+
+        <LinearLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/namaguru"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Panca" />
+
+            <TextView
+                android:id="@+id/mapel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bahasa Indonesia" />
+
+            <TextView
+
+                android:id="@+id/deskripsi"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="Cara menulis surat lamaran nikah" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

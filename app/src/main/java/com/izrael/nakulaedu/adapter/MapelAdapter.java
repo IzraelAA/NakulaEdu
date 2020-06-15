@@ -15,17 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.izrael.nakulaedu.PelajaranActivity;
 import com.izrael.nakulaedu.R;
-import com.izrael.nakulaedu.classmodel.Result;
+import com.izrael.nakulaedu.model.MapelResult;
 
 import java.util.List;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> {
-    List<Result> list;
+    List<MapelResult> list;
     Context context;
 
-    public MapelAdapter(Context contextt, List<Result> list) {
+    public MapelAdapter(Context contextt, List<MapelResult> list) {
         this.context = contextt;
         this.list = list;
     }
@@ -39,21 +39,13 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final MapelAdapter.ViewHolder holder, int position) {
-        final Result result = list.get(position);
-        Log.d(TAG, "onBindViewHolder: "+result.getNamamatapelajaran());
-        if (result.getNamamatapelajaran().equals("Jaringan Komputer")){
-            holder.mapel.setImageResource(R.drawable.agamahindu);
-        }else if (result.getNamamatapelajaran().equals("Web Design")) {
-            holder.mapel.setImageResource(R.drawable.agamakristen);
-        }else {
-            holder.mapel.setImageResource(R.drawable.bahasainggris);
-        }
+        final MapelResult MapelResult = list.get(position);
+        Log.d(TAG, "onBindViewHolder: "+MapelResult.getNamaPelajaran());
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, PelajaranActivity.class);
-                intent.putExtra("kodejadwal",result.getKodejdwl());
-                holder.itemView.getContext().startActivity(intent);
+                Toast.makeText(context, "Sedag dalam proses", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -67,7 +59,6 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
         ImageView  mapel;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mapel = itemView.findViewById(R.id.mapelgambar);
         }
     }
 }

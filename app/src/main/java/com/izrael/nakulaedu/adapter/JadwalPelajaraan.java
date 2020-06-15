@@ -39,15 +39,12 @@ public class JadwalPelajaraan extends RecyclerView.Adapter<JadwalPelajaraan.View
         final JadwalResult jadwal = list.get(position);
         
         holder.hari.setText(jadwal.getHari());
-        holder.mapel.setText("Mata pelajaran : "+jadwal.getNamamatapelajaran());
-        holder.mulai.setText("Jam mulai         : "+jadwal.getJamSelesai() );
-        holder.keluar.setText("Jam Selesai      : "+jadwal.getJamMulai() );
-        if (jadwal.getNamaGuru().equals("")){
-            holder.guru.setText("Guru                   : Nama guru tidak tercantum");
-        }else {
+        holder.mapel.setText("Mata pelajaran : "+jadwal.getNamaPelajaran());
+        holder.mulai.setText("Jam mulai         : "+jadwal.getMasuk() );
+        holder.keluar.setText("Jam Selesai      : "+jadwal.getKeluar() );
 
             holder.guru.setText("Guru                   : "+jadwal.getNamaGuru());
-        }
+
     }
 
     @Override

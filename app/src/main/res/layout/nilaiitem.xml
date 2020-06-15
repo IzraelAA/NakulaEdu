@@ -1,51 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginTop="5dp"
     android:elevation="6dp"
-    app:cardCornerRadius="6dp"
+    android:orientation="horizontal"
     app:cardBackgroundColor="#FFF"
-    android:orientation="horizontal">
+    app:cardCornerRadius="6dp">
+
     <LinearLayout
 
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/photonilai"
-        android:layout_marginVertical="5dp"
-        android:src="@drawable/username"
-        android:layout_width="55dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="55dp" />
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:textColor="#000"
-            android:id="@+id/guru"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Guru : Sumiya"/>
-        <TextView
-            android:textColor="#000"
-            android:id="@+id/nilai1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nilai : 90"/>
-        <TextView
-            android:textColor="#000"
-            android:id="@+id/pelajaran"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pelajaran : Ilmu Pengetahuan Alam"/>
+        android:orientation="horizontal">
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/guru"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="getNamaNilai"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/nilai1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="getNamaGuru"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/pelajaran"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="getNamaPelajaran"
+                    android:textColor="#000" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/iddatanilai"
+                android:layout_height="match_parent"
+                android:background="#ebebeb"
+                tools:listitem="@layout/idnilaiitem" />
+        </LinearLayout>
 
     </LinearLayout>
 

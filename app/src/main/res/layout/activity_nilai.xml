@@ -14,6 +14,20 @@
     app:title="Nilai Harian"
     app:titleTextColor="#FFF"
     android:background="@drawable/gradianttoolbar"/>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:duration="1500"
+        android:id="@+id/shimmernilai">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <include layout="@layout/placeholderdetailnilai"/>
+            <include layout="@layout/placeholderdetailnilai"/>
+            <include layout="@layout/placeholderdetailnilai"/>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nilai"
         tools:listitem="@layout/nilaiitem"

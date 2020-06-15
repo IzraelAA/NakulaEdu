@@ -1,32 +1,32 @@
 package com.izrael.nakulaedu.model;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GetJadwal {
-
-    @SerializedName("message")
+    @SerializedName("status")
     @Expose
-    private String message;
-    @SerializedName("result")
+    private Status             status;
+    @SerializedName("data")
     @Expose
-    private List<JadwalResult> result ;
+    private List<JadwalResult> data = null;
 
-    public String getMessage() {
-        return message;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
-    public List<JadwalResult> getResult() {
-        return result;
+    public List<JadwalResult> getData() {
+        return data;
     }
 
-    public void setResult(List<JadwalResult> result) {
-        this.result = result;
+    public void setData(List<JadwalResult> data) {
+        this.data = data;
     }
 
 }

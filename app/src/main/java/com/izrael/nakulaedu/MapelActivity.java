@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.izrael.nakulaedu.adapter.MapelAdapter;
 import com.izrael.nakulaedu.classmodel.MapelClass;
 import com.izrael.nakulaedu.model.GetTahun;
 import com.izrael.nakulaedu.classmodel.Result;
+import com.izrael.nakulaedu.model.MapelResult;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
@@ -24,55 +27,42 @@ import retrofit2.Response;
 
 public class MapelActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    private List<Result> results;
-    private MapelAdapter nilaiAdapter;
+    private List<MapelResult> results;
+    private MapelAdapter      nilaiAdapter;
     ApiInterface   mApiInterface;
     SessionManager sessionManager;
+    ShimmerFrameLayout shimmerFrameLayout;
     String stahun;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapel);
         results = new ArrayList<>();
+        shimmerFrameLayout = findViewById(R.id.shimmer);
+        shimmerFrameLayout.setVisibility(View.VISIBLE);
+        shimmerFrameLayout.startShimmerAnimation();
         recyclerView = findViewById(R.id.recylerviewmapel);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(MapelActivity.this));
         sessionManager = new SessionManager(MapelActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-        ApiTahun();
-    }
-
-    private void ApiTahun(){
-        Call<GetTahun> tahun = mApiInterface.api_tahun(sessionManager.get_TAHUN());
-        tahun.enqueue(new Callback<GetTahun>() {
-            @Override
-            public void onResponse(Call<GetTahun> call, Response<GetTahun> response) {
-
-                stahun = response.body().getResult();
-                ApiJadwal();
-            }
-
-            @Override
-            public void onFailure(Call<GetTahun> call, Throwable t) {
-
-            }
-        });
+        ApiJadwal();
     }
     private void ApiJadwal() {
-        Call<MapelClass> uploadGambar = mApiInterface.mapel(sessionManager.get_NISN(), sessionManager.get_KODEKELAS(), "2",stahun);
+        Call<MapelClass> uploadGambar = mApiInterface.mapel(Integer.parseInt(sessionManager.get_KODEKELAS()));
         uploadGambar.enqueue(new Callback<MapelClass>() {
             @Override
             public void onResponse(Call<MapelClass> call, Response<MapelClass> response) {
                 assert response.body() != null;
 
-                results.addAll(response.body().getResult());
+                results.addAll(response.body().getData());
 
+                shimmerFrameLayout.setVisibility(View.GONE);
+                shimmerFrameLayout.stopShimmerAnimation();
                 nilaiAdapter = new MapelAdapter(MapelActivity.this, results);
 
                 recyclerView.setAdapter(nilaiAdapter);
 
-                Log.e("TAG", "onkkoResponse: " + results.get(1).getNamamatapelajaran());
-                Log.d("", "onResponse: " + response.body());
             }
 
             @Override

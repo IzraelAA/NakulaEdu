@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundchat"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".AbsensiActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradianttoolbar"
+        app:title="Absensi"
+        app:titleTextColor="#FFF" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Selasa,21 April 2020" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgphoto"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/username" />
+
+    <Button
+        android:id="@+id/ambilgambar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/buttonbeckgruond"
+        android:paddingHorizontal="20dp"
+        android:text="Ambil Gambar"
+        android:textColor="#FFf" />
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+
+            android:id="@+id/upload"
+            android:layout_width="138dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="137dp"
+            android:background="@drawable/buttonbeckgruond"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="5dp"
+            android:text="Absen"
+            android:textColor="#FFf" />
+
+        <ProgressBar
+            android:id="@+id/pg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="73dp"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:text="*Pastikan wajah anda tepat depan kamera \n*Aktifkan GPS anda"
+        android:textColor="#DA1919" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        android:gravity="bottom"
+        android:text="Butuh bantuan?" />
+
+
+</LinearLayout>
