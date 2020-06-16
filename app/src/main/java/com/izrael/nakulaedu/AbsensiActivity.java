@@ -268,28 +268,8 @@ public class AbsensiActivity extends AppCompatActivity implements EasyPermission
         File file = mediaFile;
 
 
-        Log.d("File", "" + file.getName());
-        Call<ResponseBody> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(), longtitude,latitude, file.getName());
-        uploadGambar.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                upload.setEnabled(true);
-                pg.setVisibility(View.GONE);
-                Toast.makeText(AbsensiActivity.this, "Sukses..!!!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AbsensiActivity.this, Dashboard.class);
-                startActivity(intent);
-            }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                upload.setEnabled(true);
-                pg.setVisibility(View.GONE);
-                Log.d(TAG, "onFailure: " + t);
-                Toast.makeText(AbsensiActivity.this, "Terabsen..!!!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(AbsensiActivity.this, Dashboard.class);
-                startActivity(intent);
-            }
-        });
+
 
     }
 

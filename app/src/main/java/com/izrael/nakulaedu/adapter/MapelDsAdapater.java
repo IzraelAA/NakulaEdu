@@ -41,8 +41,8 @@ public class MapelDsAdapater extends RecyclerView.Adapter<MapelDsAdapater.ViewHo
         final MapelResult MapelResult = list.get(position);
         Log.d(TAG, "onBindViewHolder: " + MapelResult.getNamaPelajaran());
         holder.guru.setText(MapelResult.getNamaPelajaran());
-        holder.nama.setText(MapelResult.getNamaPelajaran());
-        holder.deskripsi.setText(MapelResult.getNamaPelajaran());
+        holder.nama.setText(MapelResult.getNamaGuru());
+        holder.deskripsi.setText(MapelResult.getDeskripsi());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

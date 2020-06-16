@@ -22,6 +22,9 @@ public class DataQuizUjian {
     @SerializedName("nama_quiz")
     @Expose
     private String namaQuiz;
+    @SerializedName("type")
+    @Expose
+    private String type;
     @SerializedName("created_at")
     @Expose
     private Object createdAt;
@@ -31,12 +34,33 @@ public class DataQuizUjian {
     @SerializedName("nama_pelajaran")
     @Expose
     private String namaPelajaran;
+    @SerializedName("deskripsi")
+    @Expose
+    private String deskripsi;
     @SerializedName("nama_guru")
     @Expose
     private String namaGuru;
+    @SerializedName("email")
+    @Expose
+    private String email;
+    @SerializedName("no_telphone")
+    @Expose
+    private String noTelphone;
     @SerializedName("nik")
     @Expose
     private String nik;
+    @SerializedName("alamat")
+    @Expose
+    private String alamat;
+    @SerializedName("agama")
+    @Expose
+    private String agama;
+    @SerializedName("jenis_kelamin")
+    @Expose
+    private String jenisKelamin;
+    @SerializedName("hoby")
+    @Expose
+    private String hoby;
     @SerializedName("password")
     @Expose
     private String password;
@@ -92,6 +116,14 @@ public class DataQuizUjian {
         this.namaQuiz = namaQuiz;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public Object getCreatedAt() {
         return createdAt;
     }
@@ -116,6 +148,14 @@ public class DataQuizUjian {
         this.namaPelajaran = namaPelajaran;
     }
 
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
     public String getNamaGuru() {
         return namaGuru;
     }
@@ -124,12 +164,60 @@ public class DataQuizUjian {
         this.namaGuru = namaGuru;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNoTelphone() {
+        return noTelphone;
+    }
+
+    public void setNoTelphone(String noTelphone) {
+        this.noTelphone = noTelphone;
+    }
+
     public String getNik() {
         return nik;
     }
 
     public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+
+    public String getAgama() {
+        return agama;
+    }
+
+    public void setAgama(String agama) {
+        this.agama = agama;
+    }
+
+    public String getJenisKelamin() {
+        return jenisKelamin;
+    }
+
+    public void setJenisKelamin(String jenisKelamin) {
+        this.jenisKelamin = jenisKelamin;
+    }
+
+    public String getHoby() {
+        return hoby;
+    }
+
+    public void setHoby(String hoby) {
+        this.hoby = hoby;
     }
 
     public String getPassword() {
@@ -147,5 +235,4 @@ public class DataQuizUjian {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-
 }

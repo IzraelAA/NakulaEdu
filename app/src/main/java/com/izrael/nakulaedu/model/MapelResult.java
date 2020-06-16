@@ -9,34 +9,37 @@ public class MapelResult {
     private Integer idMapel;
     @SerializedName("nama_pelajaran")
     @Expose
-    private String  namaPelajaran;
+    private String namaPelajaran;
     @SerializedName("id_guru")
     @Expose
     private Integer idGuru;
     @SerializedName("created_at")
     @Expose
-    private Object  createdAt;
+    private Object createdAt;
     @SerializedName("updated_at")
     @Expose
-    private Object  updatedAt;
+    private Object updatedAt;
     @SerializedName("id_kelas")
     @Expose
     private Integer idKelas;
+    @SerializedName("deskripsi")
+    @Expose
+    private String deskripsi;
     @SerializedName("id_sekolah")
     @Expose
     private Integer idSekolah;
     @SerializedName("nama_guru")
     @Expose
-    private String  namaGuru;
+    private String namaGuru;
     @SerializedName("nik")
     @Expose
-    private String  nik;
+    private String nik;
     @SerializedName("password")
     @Expose
-    private String  password;
+    private String password;
     @SerializedName("picture")
     @Expose
-    private String  picture;
+    private String picture;
 
     public Integer getIdMapel() {
         return idMapel;
@@ -86,6 +89,14 @@ public class MapelResult {
         this.idKelas = idKelas;
     }
 
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
     public Integer getIdSekolah() {
         return idSekolah;
     }
@@ -93,4 +104,37 @@ public class MapelResult {
     public void setIdSekolah(Integer idSekolah) {
         this.idSekolah = idSekolah;
     }
+
+    public String getNamaGuru() {
+        return namaGuru;
+    }
+
+    public void setNamaGuru(String namaGuru) {
+        this.namaGuru = namaGuru;
+    }
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
 }

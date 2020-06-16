@@ -34,9 +34,12 @@ import com.izrael.nakulaedu.QuizActivity;
 import com.izrael.nakulaedu.R;
 import com.izrael.nakulaedu.RaportActivity;
 import com.izrael.nakulaedu.TagihanActivity;
+import com.izrael.nakulaedu.adapter.DataQuizAdapter;
 import com.izrael.nakulaedu.adapter.MapelAdapter;
 import com.izrael.nakulaedu.adapter.MapelDsAdapater;
+import com.izrael.nakulaedu.classmodel.DataQuiz;
 import com.izrael.nakulaedu.classmodel.MapelClass;
+import com.izrael.nakulaedu.model.DataQuizUjian;
 import com.izrael.nakulaedu.model.MapelResult;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
@@ -58,7 +61,10 @@ public class HomeFragment extends Fragment {
     TextView nis, nama;
     MapelDsAdapater mapeladapter;
     SessionManager  session;
-    private List<MapelResult> results;
+    private DataQuizAdapter nilaiAdapter;
+    String[] name;
+    String[] guru;
+    private List<DataQuizUjian> results;
     CircleImageView circleImageView;
     RecyclerView    recyclermapel, recyclerjadwal;
     ImageView notifikasi;
@@ -87,22 +93,21 @@ public class HomeFragment extends Fragment {
 
     }
     private void ApiJadwal() {
-        Call<MapelClass> uploadGambar = mApiInterface.mapel(Integer.parseInt(session.get_KODEKELAS()));
-        uploadGambar.enqueue(new Callback<MapelClass>() {
+        Call<DataQuiz> uploadGambar = mApiInterface.dataquiz(Integer.parseInt(session.get_KODEKELAS()));
+        uploadGambar.enqueue(new Callback<DataQuiz>() {
             @Override
-            public void onResponse(Call<MapelClass> call, Response<MapelClass> response) {
+            public void onResponse(Call<DataQuiz> call, Response<DataQuiz> response) {
                 assert response.body() != null;
-
                 results.addAll(response.body().getData());
 
-                mapeladapter = new MapelDsAdapater(getActivity(), results);
+                nilaiAdapter = new DataQuizAdapter(getActivity(),results);
 
-                recyclermapel.setAdapter(mapeladapter);
+                recyclermapel.setAdapter(nilaiAdapter);
 
             }
 
             @Override
-            public void onFailure(Call<MapelClass> call, Throwable t) {
+            public void onFailure(Call<DataQuiz> call, Throwable t) {
 
                 Log.e("TAG", "kkonResponse: " + t);
                 Log.d("", "onResponse: " + t);

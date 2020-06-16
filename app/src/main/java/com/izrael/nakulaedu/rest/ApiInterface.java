@@ -14,6 +14,7 @@ import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
 import com.izrael.nakulaedu.model.GetJadwal;
 import com.izrael.nakulaedu.model.GetTahun;
+import com.izrael.nakulaedu.model.absen;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -26,8 +27,9 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("absensi")
-    Call<ResponseBody> uploadGambar(
+    Call<absen> uploadGambar(
             @Field("id_siswa") String nis,
+            @Field("id_kelas") String id_kelas,
             @Field("longtitude") String location,
             @Field("latitude") String latitude,
             @Field("gambar") String gambar

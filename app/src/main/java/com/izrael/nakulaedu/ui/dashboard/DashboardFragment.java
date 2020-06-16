@@ -46,6 +46,7 @@ import com.izrael.nakulaedu.AbsensiActivity;
 import com.izrael.nakulaedu.BuildConfig;
 import com.izrael.nakulaedu.Dashboard;
 import com.izrael.nakulaedu.R;
+import com.izrael.nakulaedu.model.absen;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
@@ -262,25 +263,22 @@ public class DashboardFragment extends Fragment {
 
 
         Log.d("File", "" + file.getName());
-        Call<ResponseBody> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(), longtitude,latitude, file.getName());
-        uploadGambar.enqueue(new Callback<ResponseBody>() {
+        Call<absen> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(),sessionManager.get_KODEKELAS(), longtitude,latitude, file.getName());
+        uploadGambar.enqueue(new Callback<absen>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(Call<absen> call, Response<absen> response) {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "Sukses..!!!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Dashboard.class);
-                startActivity(intent);
+                Log.d(TAG, "onResponse: " +response);
+                Toast.makeText(getActivity(),response.body().getStatus().getMessage(),Toast.LENGTH_LONG).show();
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<absen> call, Throwable t) {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
                 Log.d(TAG, "onFailure: " + t);
-                Toast.makeText(getActivity(), "Terabsen..!!!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(getActivity(), Dashboard.class);
-                startActivity(intent);
+                Toast.makeText(getActivity(), "gagal", Toast.LENGTH_LONG).show();
             }
         });
 
