@@ -207,61 +207,25 @@ public class DashboardFragment extends Fragment {
 
     }
 
-    public Uri getOutputMediaFileUri() {
-        return Uri.fromFile(getOutputMediaFile());
-    }
-
     private static File getOutputMediaFile() {
 
-        // External sdcard locationgetActivity().getContentResolver().
         mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "nakula");
 
-        // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.e("Monitoring", "Oops! Failed create Monitoring directory");
                 return null;
             }
         }
-
-        // Create a media file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + "nakula" + timeStamp + ".jpg");
 
         return mediaFile;
     }
 
-    private String getRealPathFromURIPath(Uri contentURI) {
-
-        Cursor cursor = getActivity().getContentResolver().query(contentURI, null, null, null, null);
-        String result;
-
-        // for API 19 and above
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-
-
-            cursor.moveToFirst();
-            String image_id = cursor.getString(0);
-            image_id = image_id.substring(image_id.lastIndexOf(":") + 1);
-            cursor.close();
-
-            cursor = getActivity().getContentResolver().query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
-
-        }
-        if (cursor != null && cursor.moveToFirst()) {
-            result = cursor.getString(cursor.getColumnIndex("ContactNumber"));
-            cursor.close();
-        }
-        result = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-        cursor.close();
-        return result;
-    }
-
     void uploadFile(Bitmap gambarbitmap) {
 
         File file = mediaFile;
-
-
         Log.d("File", "" + file.getName());
         Call<absen> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(),sessionManager.get_KODEKELAS(), longtitude,latitude, file.getName());
         uploadGambar.enqueue(new Callback<absen>() {
@@ -270,7 +234,13 @@ public class DashboardFragment extends Fragment {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
                 Log.d(TAG, "onResponse: " +response);
-                Toast.makeText(getActivity(),response.body().getStatus().getMessage(),Toast.LENGTH_LONG).show();
+                if(response.code()== 200){
+
+                    Toast.makeText(getActivity(),response.body().getStatus().getMessage(),Toast.LENGTH_LONG).show();
+                }else{
+
+                    Toast.makeText(getActivity(),"Belum Ada Jadwal",Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
@@ -310,20 +280,7 @@ public class DashboardFragment extends Fragment {
         alertDialog.show();
     }
 
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
-        int width  = image.getWidth();
-        int height = image.getHeight();
 
-        float bitmapRatio = (float) width / (float) height;
-        if (bitmapRatio > 1) {
-            width = maxSize;
-            height = (int) (width / bitmapRatio);
-        } else {
-            height = maxSize;
-            width = (int) (height * bitmapRatio);
-        }
-        return Bitmap.createScaledBitmap(image, width, height, true);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -333,9 +290,8 @@ public class DashboardFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 try {
-                    Log.d("CAMERACAMERA", fileUri.getPath());
                     bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(fileUri));
-                    setToImageView(getResizedBitmap(bitmap, max_resolution_image));
+                    imageView.setImageBitmap(bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -344,13 +300,10 @@ public class DashboardFragment extends Fragment {
         }
     }
 
-    private void setToImageView(Bitmap bmp) {
-        //compress image
+    private void setToImageView(Bitmap bmp){
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, bytes);
         decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(bytes.toByteArray()));
-
-        //menampilkan gambar yang dipilih dari camera/gallery ke ImageView
         imageView.setImageBitmap(decoded);
     }
 

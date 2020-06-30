@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical"
+    tools:context=".SettingActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        app:title="Setting">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Settings"
+            android:textColor="#000"
+            android:textSize="20sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <Button
+        android:shadowColor="#FFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:textStyle="normal"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:paddingHorizontal="15dp"
+        android:text="Kebijakan Privasi"
+        android:textAlignment="textStart" />
+
+    <View
+        android:background="#ebebeb"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+
+    <Button
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:paddingHorizontal="15dp"
+        android:text="Syarat dan Ketentuan"
+        android:textAlignment="textStart" />
+
+    <View
+        android:background="#ebebeb"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <Button
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:paddingHorizontal="15dp"
+        android:text="Support"
+        android:textAlignment="textStart" />
+
+    <View
+        android:textStyle="normal"
+        android:background="#ebebeb"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <Button
+        android:textStyle="normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:paddingHorizontal="15dp"
+        android:text="FaQ"
+        android:textAlignment="textStart" />
+
+    <View
+        android:background="#ebebeb"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+    <TextView
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version 2.2.2" />
+
+</LinearLayout>

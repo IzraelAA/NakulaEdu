@@ -71,17 +71,19 @@ String nis,pass;
                                 session.set_ID_SISWA(response.body().getData().getIdSiswa().toString());
                                 session.set_KODEKELAS(response.body().getData().getIdKelas().toString());
                                 session.set_NISN(response.body().getData().getNis());
-                                session.set_NISN(response.body().getData().getNis());
                                 session.set_Foto(response.body().getData().getFoto());
-                                session.set_nama(response.body().getData().getNamaSiswa());
-
+                                session.set_Namakelas(response.body().getData().getNamaKelas());
+                                session.set_password(response.body().getData().getPassword());
                                 session.set_LOGO(response.body().getData().getLogo());
                                 session.set_IDSEKOLAH(response.body().getData().getIdSekolah().toString());
+                                session.set_nama(response.body().getData().getNamaSiswa());
+                                session.set_Email(response.body().getData().getEmail());
+                                session.set_NoTelpon(response.body().getData().getNoTelphone());
                                 session.set_is_loggedin();
                                 cek();
 
-                    Intent intent = new Intent(SplashLoginActivity.this, NewActivity.class);
-                    startActivity(intent);
+                                Intent intent = new Intent(SplashLoginActivity.this, NewActivity.class);
+                                startActivity(intent);
                             } else {
 
                                 Intent intent = new Intent(SplashLoginActivity.this, LoginActivity.class);
@@ -91,7 +93,8 @@ String nis,pass;
                             }
                         }
                     });
-                } else {
+                }
+                else {
                     Intent intent = new Intent(SplashLoginActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();

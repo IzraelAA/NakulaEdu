@@ -36,13 +36,6 @@
         android:layout_marginRight="10dp"
         android:layout_gravity="center"
         android:src="@drawable/username" />
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="100dp"
-        android:id="@+id/gambarsekolah"
-        android:scaleType="centerCrop"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:src="@drawable/logonakulaedu" />
 </LinearLayout>
 
             <androidx.cardview.widget.CardView
@@ -137,6 +130,27 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginRight="30dp"
+                        android:background="@null"
+                        android:hint="Kata Sandi"
+                        app:errorEnabled="true"
+                        app:passwordToggleEnabled="true">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:inputType="textPassword" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

@@ -6,10 +6,28 @@
     android:layout_height="match_parent"
     android:id="@id/container"
     tools:context=".PelajaranActivity"
-    android:orientation="horizontal">
-
-    <es.voghdev.pdfviewpager.library.PDFViewPager
-        android:id="@+id/pdfViewPager"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="480dp"/>
+        android:layout_height="wrap_content"
+    android:background="@drawable/gradianttoolbar"
+        app:titleTextColor="#FFF"
+        app:title="Materi"/>/
+
+<ProgressBar
+
+    android:id="@+id/pg"
+    android:layout_marginTop="200dp"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <es.voghdev.pdfviewpager.library.PDFViewPager
+            android:id="@+id/pdfViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="480dp"/>
+    </LinearLayout>
 </LinearLayout>

@@ -20,13 +20,14 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@drawable/logonakulaedu"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/NoActionBar">
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".DataJadwalActivity" />
+        <activity android:name=".DetailMapelActivity" />
         <activity
             android:name=".NewActivity"
             android:label="@string/title_activity_new"
-            android:theme="@style/NoActionBar">
-
-        </activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".DetailRaportActivity"
             android:theme="@style/NoActionBar" />
@@ -62,16 +63,12 @@
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".SplashLoginActivity"
-            android:theme="@style/NoActionBar" >
-        </activity>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".RaportActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".NilaiActivity"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".FiturActivity"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".MenuchatActivity"
@@ -100,7 +97,6 @@
         <activity
             android:name=".SplashScreen"
             android:theme="@style/NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -109,13 +105,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -1,31 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginHorizontal="5dp"
-    android:layout_marginTop="5dp"
-    app:cardCornerRadius="5dp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginRight="10dp"
+    app:cardCornerRadius="5dp">
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/buttonyellow" />
+
+
     <LinearLayout
-        android:layout_marginHorizontal="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/guruquiz"
+            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Panca"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Panca"
+            android:textColor="#FFF" />
+
         <TextView
             android:id="@+id/mapel"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Mapel"/>
+            android:layout_marginLeft="10dp"
+            android:text="Mapel"
+            android:textColor="#FFF" />
+
         <TextView
             android:id="@+id/tugasharian"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="MTK"/>
+            android:layout_marginLeft="10dp"
+            android:text="MTK"
+            android:textColor="#FFF" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>

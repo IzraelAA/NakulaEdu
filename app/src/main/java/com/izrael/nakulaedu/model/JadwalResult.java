@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class JadwalResult {
-
     @SerializedName("id_jadwal")
     @Expose
     private Integer idJadwal;
@@ -47,12 +46,33 @@ public class JadwalResult {
     @SerializedName("nama_pelajaran")
     @Expose
     private String namaPelajaran;
+    @SerializedName("deskripsi")
+    @Expose
+    private Object deskripsi;
     @SerializedName("nama_guru")
     @Expose
     private String namaGuru;
+    @SerializedName("email")
+    @Expose
+    private Object email;
+    @SerializedName("no_telphone")
+    @Expose
+    private Object noTelphone;
     @SerializedName("nik")
     @Expose
     private String nik;
+    @SerializedName("alamat")
+    @Expose
+    private Object alamat;
+    @SerializedName("agama")
+    @Expose
+    private Object agama;
+    @SerializedName("jenis_kelamin")
+    @Expose
+    private Object jenisKelamin;
+    @SerializedName("hoby")
+    @Expose
+    private Object hoby;
     @SerializedName("password")
     @Expose
     private String password;
@@ -172,6 +192,14 @@ public class JadwalResult {
         this.namaPelajaran = namaPelajaran;
     }
 
+    public Object getDeskripsi() {
+        return deskripsi;
+    }
+
+    public void setDeskripsi(Object deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
     public String getNamaGuru() {
         return namaGuru;
     }
@@ -180,12 +208,60 @@ public class JadwalResult {
         this.namaGuru = namaGuru;
     }
 
+    public Object getEmail() {
+        return email;
+    }
+
+    public void setEmail(Object email) {
+        this.email = email;
+    }
+
+    public Object getNoTelphone() {
+        return noTelphone;
+    }
+
+    public void setNoTelphone(Object noTelphone) {
+        this.noTelphone = noTelphone;
+    }
+
     public String getNik() {
         return nik;
     }
 
     public void setNik(String nik) {
         this.nik = nik;
+    }
+
+    public Object getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(Object alamat) {
+        this.alamat = alamat;
+    }
+
+    public Object getAgama() {
+        return agama;
+    }
+
+    public void setAgama(Object agama) {
+        this.agama = agama;
+    }
+
+    public Object getJenisKelamin() {
+        return jenisKelamin;
+    }
+
+    public void setJenisKelamin(Object jenisKelamin) {
+        this.jenisKelamin = jenisKelamin;
+    }
+
+    public Object getHoby() {
+        return hoby;
+    }
+
+    public void setHoby(Object hoby) {
+        this.hoby = hoby;
     }
 
     public String getPassword() {

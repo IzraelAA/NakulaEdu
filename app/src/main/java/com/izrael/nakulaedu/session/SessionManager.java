@@ -14,6 +14,11 @@ public class SessionManager {
     private static final String KODEKELAS = "wqiehjnqwjsdifjsdn";
     private static final String IDSEKOLAH = "GM1nZMcytGzkGORQ2lAI";
     private  static final String NISN = "jkaskasjssaassasa781381a";
+    private  static final String NoTelpon = "jkNoTelponssaassasa781381a";
+    private  static final String Email = "jkaskasjssaEmaila781381a";
+
+    private  static final String Namakelas = "jkaskawwsjssaassasa781381a";
+    private  static final String password = "jkaskpasswordssaassasa781381a";
     private SharedPreferences sp;
     private SharedPreferences.Editor spEditor;
 
@@ -69,6 +74,24 @@ public class SessionManager {
         spEditor.commit();
     }
 
+    public void set_Namakelas(String value){
+        spEditor.putString(Namakelas, value);
+        spEditor.commit();
+    }
+
+    public  String getNamakelas() {
+        return sp.getString(Namakelas,"");
+    }
+
+    public void set_password(String value){
+        spEditor.putString(password, value);
+        spEditor.commit();
+    }
+
+    public  String getpassword() {
+        return sp.getString(password,"");
+    }
+
     public String get_KODEKELAS(){
         return sp.getString(KODEKELAS,"");
     }
@@ -82,6 +105,23 @@ public class SessionManager {
 
     public String get_LOGO(){
         return sp.getString(LOGO,"");
+    }
+
+    public void set_NoTelpon(String value){
+        spEditor.putString(NoTelpon, value);
+        spEditor.commit();
+    }
+
+    public String get_NoTelpon(){
+        return sp.getString(NoTelpon,"");
+    }
+    public void set_Email(String value){
+        spEditor.putString(Email, value);
+        spEditor.commit();
+    }
+
+    public String get_Email(){
+        return sp.getString(Email,"");
     }
 
 

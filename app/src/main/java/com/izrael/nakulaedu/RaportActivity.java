@@ -27,16 +27,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RaportActivity extends AppCompatActivity {
-RecyclerView recyclerView;
+    RecyclerView recyclerView;
     private List<DataRaport> results;
     private RaportAdapter nilaiAdapter;
-    String[]           name;
-    String[]           guru;
-    String[]           nilai;
-    ApiInterface       mApiInterface;
-    SessionManager     sessionManager;
-    ShimmerFrameLayout shimmerFrameLayout;
-    String             stahun;
+    ApiInterface mApiInterface;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +46,25 @@ RecyclerView recyclerView;
     }
 
     private void getdata() {
-        Call<Raport> uploadGambar = mApiInterface.raport(2);
+        Call<Raport> uploadGambar = mApiInterface.raport(Integer.parseInt(sessionManager.get_ID_SISWA()));
         uploadGambar.enqueue(new Callback<Raport>() {
             @Override
             public void onResponse(Call<Raport> call, Response<Raport> response) {
                 assert response.body() != null;
+                if (response.code() == 200) {
+                    results.addAll(response.body().getData());
 
-                results.addAll(response.body().getData());
+                    nilaiAdapter = new RaportAdapter(RaportActivity.this, results);
 
-                nilaiAdapter = new RaportAdapter(RaportActivity.this,results);
-
-                recyclerView.setAdapter(nilaiAdapter);
-
-                Log.e("TAG", "onkkoResponse: "+response.body());
-                Log.d("22", "onResponse: "+response.body());
+                    recyclerView.setAdapter(nilaiAdapter);
+                }
             }
+
             @Override
             public void onFailure(Call<Raport> call, Throwable t) {
 
-                Log.e("TAG", "kkonResponse: "+t);
-                Log.d("", "onResponse: "+t);
+                Log.e("TAG", "kkonResponse: " + t);
+                Log.d("", "onResponse: " + t);
             }
         });
 

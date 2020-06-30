@@ -48,6 +48,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/kelas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nis"
@@ -87,11 +88,14 @@
         android:orientation="vertical">
 
         <ScrollView
+
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp">
+            android:layout_height="wrap_content" >
 
             <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -118,9 +122,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="10dp"
-                                android:text="Materi "
-                                android:textSize="20dp"
-                                android:textStyle="bold" />
+                                android:text="Tugas "
+                                android:textSize="18dp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -128,7 +131,8 @@
                                 android:layout_marginTop="10dp"
                                 android:text="Edu "
                                 android:textColor="#ffb347"
-                                android:textSize="20dp"
+
+                                android:textSize="18dp"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -145,18 +149,10 @@
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/materirecyclerview"
                                     android:layout_width="wrap_content"
-                                    tools:listitem="@layout/reclerviewmapel"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
                                     android:nestedScrollingEnabled="true"
                                     android:orientation="horizontal" />
-
-                                <TextView
-                                    android:layout_marginVertical="20dp"
-                                    android:layout_gravity="center"
-                                    android:drawableTop="@drawable/ic_last_page_black_24dp"
-                                    android:text="Lihat Semua"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content" />
                             </LinearLayout>
                         </HorizontalScrollView>
                     </LinearLayout>
@@ -180,8 +176,7 @@
                             android:layout_marginLeft="20dp"
                             android:layout_marginTop="10dp"
                             android:text="Jadwal "
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textSize="18dp"  />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -189,205 +184,24 @@
                             android:layout_marginTop="10dp"
                             android:text="Hari ini "
                             android:textColor="#ffb347"
-                            android:textSize="20dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
 
-                        <TextView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginRight="10dp"
-                            android:gravity="right"
-                            android:text="Lihat selengkapnya "
-                            android:textColor="#ffb347"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
                     </LinearLayout>
 
-
                     <LinearLayout
+                        android:id="@+id/linearjadwal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="300dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="vertical">
 
-                        <androidx.cardview.widget.CardView
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/jadwalrecyclerview"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="10dp">
+                            tools:listitem="@layout/jadwalhari" />
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginVertical="5dp"
-                                    android:src="@drawable/username" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginVertical="5dp"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Guru                   : Harianto"
-
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Mata pelajaran : Matematika"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Mulai         : 08:00:00"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Selesai      : 09:00:00"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp" >
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginVertical="5dp"
-                                    android:src="@drawable/username" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginVertical="5dp"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Guru                   : Harianto"
-
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Mata pelajaran : Matematika"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Mulai         : 08:00:00"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Selesai      : 09:00:00"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="15dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="10dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <de.hdodenhof.circleimageview.CircleImageView
-                                    android:layout_width="70dp"
-                                    android:layout_height="70dp"
-                                    android:layout_marginVertical="5dp"
-                                    android:src="@drawable/username" />
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginVertical="5dp"
-                                    android:gravity="center"
-                                    android:orientation="vertical">
-
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Guru                   : Harianto"
-
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Mata pelajaran : Matematika"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Mulai         : 08:00:00"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginHorizontal="20dp"
-                                        android:text="Jam Selesai      : 09:00:00"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
 
                     </LinearLayout>
                 </LinearLayout>
@@ -396,6 +210,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="20dp"
                     app:cardCornerRadius="20dp">
 
                     <LinearLayout
@@ -416,8 +231,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_marginTop="10dp"
                                 android:text="Fitur "
-                                android:textSize="20dp"
-                                android:textStyle="bold" />
+                                android:textSize="18dp"  />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -467,12 +281,12 @@
                             android:orientation="horizontal">
 
                             <Button
-                                android:id="@+id/tugas"
+                                android:id="@+id/mapel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                android:background="@drawable/tugas" />
+                                android:background="@drawable/mapel" />
 
                             <Button
                                 android:id="@+id/nilaiharian"

@@ -41,7 +41,6 @@ public class DataQuizAdapter extends RecyclerView.Adapter<DataQuizAdapter.ViewHo
         holder.guru.setText(quizUjian.getNamaGuru());
         holder.mapel.setText(quizUjian.getNamaPelajaran());
         holder.tugasharian.setText(quizUjian.getNamaQuiz());
-        holder.tugasharian.setText(quizUjian.getType());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

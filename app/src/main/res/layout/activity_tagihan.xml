@@ -25,50 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <TextView
-                android:textSize="20dp"
-                android:textColor="#FFF"
-                android:layout_marginTop="2dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Anda memiliki beberapa tagihan :"/>
-            <TextView
-                android:layout_marginBottom="2dp"
-                android:textColor="#FFF"
-                android:layout_marginTop="2dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rp. 100.000 seragam sekolah"/>
-            <TextView
-                android:layout_marginBottom="2dp"
-                android:textColor="#FFF"
-                android:layout_marginTop="2dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rp. 50.000 daftar ulang"/>
-            <TextView
-                android:layout_marginBottom="2dp"
-                android:textColor="#FFF"
-                android:layout_marginTop="2dp"
-                android:layout_marginHorizontal="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Rp. 50.000 Iuran sekolah"/>
-
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_width="match_parent"
+               android:layout_marginBottom="5dp"
+               tools:listitem="@layout/tagihan"
+               android:layout_height="wrap_content"
+               android:id="@+id/tagihan"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:textColor="#FFF"
-        android:text="Bayar"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonbeckgruond"
-        android:layout_marginHorizontal="10dp"
-        />
 </LinearLayout>

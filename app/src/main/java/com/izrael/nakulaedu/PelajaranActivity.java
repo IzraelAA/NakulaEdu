@@ -36,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PelajaranActivity extends AppCompatActivity implements DownloadFile.Listener {
-    String url = "http://siakad.nakula.co.id/files/";
+    String url = "https://testing.nakula.co.id/assets/materi/";
     String kode, api;
     private List<Result> results;
     private JadwalPelajaraan nilaiAdapter;
@@ -47,6 +47,7 @@ public class PelajaranActivity extends AppCompatActivity implements DownloadFile
     ApiInterface mApiInterface;
     LinearLayout root;
     EditText etPdfUrl;
+    ProgressBar pg;
     Button btnDownload;
     PDFPagerAdapter adapter;
     final Context ctx = this;
@@ -57,9 +58,11 @@ public class PelajaranActivity extends AppCompatActivity implements DownloadFile
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelajaran);
-        Intent i = getIntent();
         root = findViewById(R.id.container);
-        kode = i.getStringExtra("kodejadwal");
+        Intent i = getIntent();
+        pg = findViewById(R.id.pg);
+        pg.setVisibility(View.VISIBLE);
+        kode = i.getStringExtra("file");
         results = new ArrayList<>();
         session = new SessionManager(PelajaranActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
@@ -78,29 +81,9 @@ public class PelajaranActivity extends AppCompatActivity implements DownloadFile
     }
 
     private void ApiJadwal() {
-        Call<Bahan> uploadGambar = mApiInterface.bahan(session.get_NISN(), kode);
-        uploadGambar.enqueue(new Callback<Bahan>() {
-            @Override
-            public void onResponse(Call<Bahan> call, Response<Bahan> response) {
-                assert response.body() != null;
 
-                results.addAll(response.body().getResult());
-
-                api = results.get(0).getFileUpload();
-
-                remotePDFViewPager = new RemotePDFViewPager(ctx, url + api, listener);
+                remotePDFViewPager = new RemotePDFViewPager(ctx, url + kode, listener);
                 remotePDFViewPager.setId(R.id.pdfViewPager);
-                Log.e("TAG", "onkkoResponse: " + api);
-                Log.d("", "onResponse: " + response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Bahan> call, Throwable t) {
-
-                Log.e("TAG", "kkonResponse: " + t);
-                Log.d("", "onResponse: " + t);
-            }
-        });
 
     }
 
@@ -114,6 +97,7 @@ public class PelajaranActivity extends AppCompatActivity implements DownloadFile
     public void onSuccess(String url, String destinationPath) {
         adapter = new PDFPagerAdapter(this, FileUtil.extractFileNameFromURL(url));
         remotePDFViewPager.setAdapter(adapter);
+        pg.setVisibility(View.GONE);
         updateLayout();
     }
 

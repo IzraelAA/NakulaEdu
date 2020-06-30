@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.izrael.nakulaedu.DetailMapelActivity;
+import com.izrael.nakulaedu.PdfActivity;
 import com.izrael.nakulaedu.PelajaranActivity;
 import com.izrael.nakulaedu.R;
 import com.izrael.nakulaedu.model.MapelResult;
@@ -41,11 +43,17 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final MapelAdapter.ViewHolder holder, int position) {
         final MapelResult MapelResult = list.get(position);
         Log.d(TAG, "onBindViewHolder: "+MapelResult.getNamaPelajaran());
+            holder.deskripsi.setText(MapelResult.getDeskripsi());
+            holder.namaguru.setText(MapelResult.getNamaPelajaran());
+            holder.mapel.setText(MapelResult.getNamaGuru());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Sedag dalam proses", Toast.LENGTH_SHORT).show();
+                String cek = String.valueOf(MapelResult.getIdMapel());
+                Intent intent = new Intent(holder.itemView.getContext(), DetailMapelActivity.class);
+                intent.putExtra("idmapel",cek);
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }
@@ -56,9 +64,14 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView  mapel;
+
+        TextView  mapel,deskripsi,namaguru;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            namaguru = itemView.findViewById(R.id.namaguru);
+            mapel = itemView.findViewById(R.id.mapel);
+            deskripsi = itemView.findViewById(R.id.deskripsi);
+
         }
     }
 }

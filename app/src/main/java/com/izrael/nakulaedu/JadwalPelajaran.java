@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.izrael.nakulaedu.adapter.JadwalPelajaraan;
-import com.izrael.nakulaedu.classmodel.Jadwal;
+import com.izrael.nakulaedu.adapter.JadwalHari;
 import com.izrael.nakulaedu.model.GetJadwal;
-import com.izrael.nakulaedu.model.GetTahun;
 import com.izrael.nakulaedu.model.JadwalResult;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
@@ -27,10 +27,8 @@ import retrofit2.Response;
 
 public class JadwalPelajaran extends AppCompatActivity {
     private List<JadwalResult> results;
-    private JadwalPelajaraan nilaiAdapter;
-    String[]       name;
-    String[]       guru;
-    String[]       nilai;
+    private JadwalHari nilaiAdapter;
+    String     name;
     ApiInterface   mApiInterface;
     RecyclerView   recyclerView;
     SessionManager sessionManager;
@@ -44,17 +42,18 @@ public class JadwalPelajaran extends AppCompatActivity {
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.setVisibility(View.VISIBLE);
         shimmerFrameLayout.startShimmerAnimation();
+        Intent i = getIntent();
+        name = i.getStringExtra("hari");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(JadwalPelajaran.this));
         results = new ArrayList<>();
         sessionManager = new SessionManager(JadwalPelajaran.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         ApiJadwal();
-//        ListAdd();
     }
 
     private void ApiJadwal(){
-        Call<GetJadwal> uploadGambar = mApiInterface.jadwal(Integer.parseInt(sessionManager.get_KODEKELAS()));
+        Call<GetJadwal> uploadGambar = mApiInterface.jadwalhari(Integer.parseInt(sessionManager.get_KODEKELAS()),name);
         uploadGambar.enqueue(new Callback<GetJadwal>() {
             @Override
             public void onResponse(Call<GetJadwal> call, Response<GetJadwal> response) {
@@ -62,7 +61,7 @@ public class JadwalPelajaran extends AppCompatActivity {
 
                 results.addAll(response.body().getData());
 
-                nilaiAdapter = new JadwalPelajaraan(JadwalPelajaran.this,results);
+                nilaiAdapter = new JadwalHari(JadwalPelajaran.this,results);
 
                 shimmerFrameLayout.setVisibility(View.GONE);
                 shimmerFrameLayout.stopShimmerAnimation();
