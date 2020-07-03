@@ -97,7 +97,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("detailraport")
     Call<IdRaport> detailraport(
-            @Field("id_nialiraport") int id_nialiraport
+            @Field("id_nialiraport") String id_nialiraport
     );
 
     @FormUrlEncoded

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.izrael.nakulaedu.R;
-import com.izrael.nakulaedu.model.JadwalResult;
 import com.izrael.nakulaedu.model.kantin;
 
 import java.util.List;

@@ -51,12 +51,15 @@ public class KantinActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DataKantin> call, Response<DataKantin> response) {
                 assert response.body() != null;
-
+                if (response.code() == 200){
                 results.addAll(response.body().getData());
 
                 nilaiAdapter = new KantinAdapter(KantinActivity.this,results);
 
-                recyclerView.setAdapter(nilaiAdapter);
+                recyclerView.setAdapter(nilaiAdapter);}
+                else {
+
+                }
             }
             @Override
             public void onFailure(Call<DataKantin> call, Throwable t) {

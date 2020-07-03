@@ -200,7 +200,6 @@ public class HomeFragment extends Fragment {
         raport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent in = new Intent(getActivity(), RaportActivity.class);
                 startActivity(in);
             }
@@ -208,7 +207,6 @@ public class HomeFragment extends Fragment {
         setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent in = new Intent(getActivity(), SettingActivity.class);
                 startActivity(in);
             }

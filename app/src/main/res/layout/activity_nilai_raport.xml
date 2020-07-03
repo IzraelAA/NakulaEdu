@@ -3,19 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/backgroundchat"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NilaiRaportActivity">
-    <androidx.appcompat.widget.Toolbar
+    tools:context=".RaportActivity">
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Nilai Raport"
-        android:background="@drawable/gradianttoolbar"
-        app:titleTextColor="#FFF"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/nilairapot" />
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reclerviewnilairaport"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/nilairaportlist"
-        android:id="@+id/reclerviewnilairaport"/>
+        android:layout_marginTop="-70dp"
+        tools:listitem="@layout/nilairaportlist" />
 </LinearLayout>

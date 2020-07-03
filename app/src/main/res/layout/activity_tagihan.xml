@@ -4,34 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundchat"
     android:orientation="vertical"
     tools:context=".TagihanActivity">
-    <androidx.appcompat.widget.Toolbar
+    <ImageView
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradianttoolbar"
-        app:title="Tagihan"
-        app:titleTextColor="#FFF"/>
-    <androidx.cardview.widget.CardView
-        app:cardBackgroundColor="#8ec7F9"
-        android:layout_width="match_parent"
-        app:cardCornerRadius="@dimen/cardview_default_elevation"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="5dp"
-        >
+        android:src="@drawable/tagihantop"/>
         <LinearLayout
+            android:layout_marginTop="-10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
            <androidx.recyclerview.widget.RecyclerView
+
                android:layout_width="match_parent"
                android:layout_marginBottom="5dp"
                tools:listitem="@layout/tagihan"
                android:layout_height="wrap_content"
                android:id="@+id/tagihan"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

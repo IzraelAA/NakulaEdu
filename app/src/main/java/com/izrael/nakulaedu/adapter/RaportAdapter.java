@@ -55,6 +55,7 @@ public class RaportAdapter  extends RecyclerView.Adapter<RaportAdapter.ViewHolde
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), DetailRaportActivity.class);
+                intent.putExtra("hari",nilai.getIdDatarapot().toString());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

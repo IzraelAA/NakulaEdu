@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="5dp"
-    android:layout_marginTop="5dp"
-    app:cardBackgroundColor="#8ec7F9"
-    app:cardCornerRadius="@dimen/cardview_default_elevation">
-
-    <LinearLayout
-        android:layout_margin="5dp"
+    android:orientation="vertical">
+    <ImageView
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:src="@drawable/buttona"/>
 <LinearLayout
     android:layout_width="match_parent"
-    android:orientation="horizontal" android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#1B1464"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp"
+            android:id="@+id/spp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Spp "  />
+
+        <TextView
+            android:textStyle="bold"
+            android:textColor="#1B1464"
+            android:textSize="20sp"
+            android:id="@+id/bulan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Bulan Januari"
+            android:textAlignment="viewEnd"  />
+
+    </LinearLayout>
+
     <TextView
-        android:id="@+id/spp"
-        android:textColor="#FFF"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Spp "/>
-    <TextView
-        android:textAlignment="viewEnd"
-        android:id="@+id/bulan"
-        android:textColor="#FFF"
-        android:layout_marginRight="10dp"
+        android:textStyle="bold"
+        android:textColor="#1B1464"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/tanggal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bulan Januari"/>
+        android:text="Tanggal 20-12-2019 "  />
+
+    <TextView
+        android:textStyle="bold"
+        android:textColor="#1B1464"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/jumlah"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rp.100.000,- "  />
 
 </LinearLayout>
-        <TextView
-            android:id="@+id/tanggal"
-            android:textColor="#FFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tanggal 20-12-2019 "/>
-        <TextView
-            android:id="@+id/jumlah"
-            android:textColor="#FFF"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rp.100.000,- "/>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+</RelativeLayout>
