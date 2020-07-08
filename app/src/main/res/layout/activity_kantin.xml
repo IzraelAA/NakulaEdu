@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
     <androidx.cardview.widget.CardView
         android:layout_gravity="end"
         android:layout_marginTop="20dp"
@@ -28,6 +29,24 @@
             android:textSize="20sp" />
     </androidx.cardview.widget.CardView>
 
+    <ImageView
+        android:id="@+id/kosong"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pensil" />
+
+    <TextView
+        android:id="@+id/kosong2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:gravity="center"
+        android:text="Belum Ada Daftar Kantin"
+        android:textSize="20dp"
+        android:textStyle="bold" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/kantin"
         android:layout_width="match_parent"

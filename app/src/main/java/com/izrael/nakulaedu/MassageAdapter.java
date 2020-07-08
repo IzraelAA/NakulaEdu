@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
 import com.izrael.nakulaedu.session.SessionManager;
 
 import java.util.List;
@@ -51,7 +52,8 @@ public class MassageAdapter extends RecyclerView.Adapter<MassageAdapter.ViewHold
 //            }else {
 //                Glide.with(context).load(imageurl).into(holder.imageView);
 //            }
-            if (position == chats.size()-1){
+
+        if (position == chats.size()-1){
                 if (chat.getIsseen()){
                     holder.textseen.setText("Seen");
                 }else {

@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.izrael.nakulaedu.adapter.DataMapelAdapter;
 import com.izrael.nakulaedu.adapter.MapelAdapter;
@@ -33,6 +35,8 @@ RecyclerView recyclerView;
     private DataMapelAdapter      nilaiAdapter;
     ApiInterface   mApiInterface;
     SessionManager sessionManager;
+    ImageView kosong;
+    TextView kosong2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +44,8 @@ RecyclerView recyclerView;
         recyclerView = findViewById(R.id.materirecylerview);
         recyclerView.setHasFixedSize(true);
         Intent i = getIntent();
+        kosong = findViewById(R.id.kosong);
+        kosong2 = findViewById(R.id.kosong2);
         results =new ArrayList<>();
         kode = i.getStringExtra("idmapel");
         recyclerView.setLayoutManager(new LinearLayoutManager(DetailMapelActivity.this));
@@ -53,12 +59,21 @@ RecyclerView recyclerView;
             @Override
             public void onResponse(Call<DetialMapel> call, Response<DetialMapel> response) {
                 assert response.body() != null;
+    if (response.code() == 200){
 
-                results.addAll(response.body().getData());
+        results.addAll(response.body().getData());
+        if (results.size() > 0) {
 
-                nilaiAdapter = new DataMapelAdapter(DetailMapelActivity.this, results);
+            kosong.setVisibility(View.GONE);
+            kosong2.setVisibility(View.GONE);
+        }
+        nilaiAdapter = new DataMapelAdapter(DetailMapelActivity.this, results);
 
-                recyclerView.setAdapter(nilaiAdapter);
+        recyclerView.setAdapter(nilaiAdapter);
+
+    }else{
+    }
+
 
             }
 

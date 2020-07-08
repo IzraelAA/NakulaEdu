@@ -104,13 +104,16 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
             public void onResponse(Call<Idnilai> call, Response<Idnilai> response) {
                 assert response.body() != null;
 
-                results.addAll(response.body().getData());
+                if (response.code() == 200 ){
 
-                Log.d("2", "onResponse: " + results.get(0).getNilai());
-                nilaiAdapter = new iddatanilaiadapter(holder.itemView.getContext(),results);
+                    results.addAll(response.body().getData());
 
-                Log.d("2", "onResponse: " +nilaiAdapter);
-                holder.recyclerView.setAdapter(nilaiAdapter);
+                    Log.d("2", "onResponse: " + results.get(0).getNilai());
+                    nilaiAdapter = new iddatanilaiadapter(holder.itemView.getContext(),results);
+
+                    Log.d("2", "onResponse: " +nilaiAdapter);
+                    holder.recyclerView.setAdapter(nilaiAdapter);
+                }
 
             }
 

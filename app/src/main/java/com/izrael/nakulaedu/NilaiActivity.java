@@ -64,15 +64,17 @@ public class NilaiActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DataNilai> call, Response<DataNilai> response) {
                 assert response.body() != null;
+        if (response.code() == 200){
 
-                Log.d("2", "onResponse: " + response.body());
-                results.addAll(response.body().getData());
+            Log.d("2", "onResponse: " + response.body());
+            results.addAll(response.body().getData());
 
-                shimmerFrameLayout.setVisibility(View.GONE);
-                shimmerFrameLayout.stopShimmerAnimation();
-                nilaiAdapter = new NilaiAdapter(NilaiActivity.this,results);
+            shimmerFrameLayout.setVisibility(View.GONE);
+            shimmerFrameLayout.stopShimmerAnimation();
+            nilaiAdapter = new NilaiAdapter(NilaiActivity.this,results);
 
-                recyclerView.setAdapter(nilaiAdapter);
+            recyclerView.setAdapter(nilaiAdapter);
+        }
 
             }
 

@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
-                android:text="Menu Chat"
+                android:text="Chat Nakula"
                 android:textSize="25dp"
                 android:textColor="#FFF"
                 android:textStyle="bold" />

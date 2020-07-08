@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.izrael.nakulaedu.adapter.KantinAdapter;
 import com.izrael.nakulaedu.adapter.NotifikasiAdpater;
@@ -32,11 +35,15 @@ public class KantinActivity extends AppCompatActivity {
     String     name;
     ApiInterface   mApiInterface;
     SessionManager sessionManager;
+    ImageView kosong;
+    TextView kosong2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kantin);
         recyclerView = findViewById(R.id.kantin);
+        kosong = findViewById(R.id.kosong);
+        kosong2 = findViewById(R.id.kosong2);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(KantinActivity.this));
         results = new ArrayList<>();
@@ -53,10 +60,15 @@ public class KantinActivity extends AppCompatActivity {
                 assert response.body() != null;
                 if (response.code() == 200){
                 results.addAll(response.body().getData());
+                if (results.size()>0){
 
+                    kosong.setVisibility(View.GONE);
+                    kosong2.setVisibility(View.GONE);
+                }
                 nilaiAdapter = new KantinAdapter(KantinActivity.this,results);
 
-                recyclerView.setAdapter(nilaiAdapter);}
+                recyclerView.setAdapter(nilaiAdapter);
+                }
                 else {
 
                 }

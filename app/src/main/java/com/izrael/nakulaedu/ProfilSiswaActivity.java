@@ -1,5 +1,6 @@
 package com.izrael.nakulaedu;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +8,18 @@ import android.view.View;
 import android.widget.*;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.izrael.nakulaedu.classmodel.Login;
 import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -23,6 +30,7 @@ public class ProfilSiswaActivity extends AppCompatActivity {
     TextInputLayout name, nis, email, hp,inputPassword;
     SessionManager session;
     Button         Logout,update;
+    DatabaseReference reference;
     CircleImageView circleImageView;
     String sname,snis,semail,shp,pass;
     ApiInterface mApiInterface;
@@ -79,15 +87,30 @@ public class ProfilSiswaActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<DefaultResponse> call, Response<DefaultResponse> response) {
                 if (response.code() == 200){
+                        reference = FirebaseDatabase.getInstance().getReference("Users").child(session.get_ID_SISWA());
+                        HashMap<String, String> hashmap = new HashMap<>();
+                    hashmap.put("id",session.get_ID_SISWA());
+                    hashmap.put("username",sname);
+                        hashmap.put("search",sname.toLowerCase());
+                    hashmap.put("imageUrl",  session.get_Foto());
+                    hashmap.put("status", "offline");
+                        reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    session.set_nama(sname);
+                                    session.set_Email(snis);
+                                    session.set_NoTelpon(semail);
+                                    session.set_password(pass);
+                                    Toast.makeText(ProfilSiswaActivity.this,"Berhasil di update",Toast.LENGTH_LONG).show();
 
-                    session.set_nama(sname);
-                    session.set_Email(snis);
-                    session.set_NoTelpon(semail);
-                    session.set_password(pass);
-                    Toast.makeText(ProfilSiswaActivity.this,"Berhasil di update",Toast.LENGTH_LONG).show();
 
+                                } else {
+                                    Toast.makeText(ProfilSiswaActivity.this,"Gagal update",Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        });
                 }else {
-
                     Toast.makeText(ProfilSiswaActivity.this,"Gagal update",Toast.LENGTH_LONG).show();
                 }
             }

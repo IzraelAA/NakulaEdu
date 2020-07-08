@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,6 +53,8 @@ public class MenuchatActivity extends AppCompatActivity {
         textView = findViewById(R.id.text);
         toolbartext = findViewById(R.id.text_profile);
         profile_image = findViewById(R.id.profile_image);
+        Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(profile_image);
+
         viewPager = findViewById(R.id.ViewPager);
         tabLayout = findViewById(R.id.tablayout_menu);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());

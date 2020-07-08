@@ -61,7 +61,7 @@ String nis,pass;
                     HashMap<String, String> hashmap = new HashMap<>();
                     hashmap.put("id", response.body().getData().getIdSiswa().toString());
                     hashmap.put("username", response.body().getData().getNamaSiswa());
-                    hashmap.put("imageUrl", response.body().getData().getFoto());
+                    hashmap.put("imageUrl",  response.body().getData().getFoto());
                     hashmap.put("status", "offline");
                     hashmap.put("search", response.body().getData().getNamaSiswa().toLowerCase());
                     reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>() {

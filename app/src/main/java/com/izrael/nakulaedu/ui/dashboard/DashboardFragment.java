@@ -54,6 +54,7 @@ import com.izrael.nakulaedu.session.SessionManager;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,31 +68,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DashboardFragment extends Fragment {
-    public static final    int         MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    public static final  String      ALLOW_KEY                     = "ALLOWED";
-    public static final  String      CAMERA_PREF                   = "camera_pref";
-    private static       File        mediaStorageDir;
-    private              Uri         imageUrl;
-    private              StorageTask uploadTask;
-    private static final String      TAG                           = AbsensiActivity.class.getSimpleName();
-    private static final int         CAMERA_REQUEST_CODE           = 7777;
+    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
+    public static final String ALLOW_KEY = "ALLOWED";
+    public static final String CAMERA_PREF = "camera_pref";
+    private static File mediaStorageDir;
+    private Uri imageUrl;
+    private StorageTask uploadTask;
+    private static final String TAG = AbsensiActivity.class.getSimpleName();
+    private static final int CAMERA_REQUEST_CODE = 7777;
     CircleImageView imageView;
-    int             bitmap_size = 20;
+    int bitmap_size = 20;
     static File mediaFile;
     Bitmap bitmap, decoded;
-    Uri          fileUri;
+    Uri fileUri;
     ApiInterface mApiInterface;
-    String       longtitude,latitude;
-    int    max_resolution_image = 200;
+    String longtitude, latitude;
+    int max_resolution_image = 200;
     Button upload, ambilgambar;
-    public final static String BASE_URL         = "http://siakad.nakula.co.id/";
-    public static final int    REQUEST_IMAGE    = 120;
-    public static final int    REQUEST_IMAGE1    = 1210;
-    public static final int    REQUEST_IMAGE111 = 1330;
-    public static final int    REQUEST_IMAGE222 = 1450;
-    public static final int    REQUEST_IMAGE2222 = 14520;
-    public final        int    REQUEST_CAMERA   = 0;
-    ProgressBar    pg;
+    public final static String BASE_URL = "http://siakad.nakula.co.id/";
+    public static final int REQUEST_IMAGE = 120;
+    public static final int REQUEST_IMAGE1 = 1210;
+    public static final int REQUEST_IMAGE111 = 1330;
+    public static final int REQUEST_IMAGE222 = 1450;
+    public static final int REQUEST_IMAGE2222 = 14520;
+    public final int REQUEST_CAMERA = 0;
+    ProgressBar pg;
     SessionManager sessionManager;
     private StorageReference StorageRef;
 
@@ -123,72 +124,75 @@ public class DashboardFragment extends Fragment {
         prefsEditor.putBoolean(key, allowed);
         prefsEditor.commit();
     }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View           root     = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-    upload = root.findViewById(R.id.upload);
-    imageView = root.findViewById(R.id.imgphoto);
-    ambilgambar = root.findViewById(R.id.ambilgambar);
-    pg = root.findViewById(R.id.pg);
-
-    mApiInterface = ApiClient.getClient().create(ApiInterface.class);
-    sessionManager = new SessionManager(getActivity());
-    StorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        upload = root.findViewById(R.id.upload);
+        imageView = root.findViewById(R.id.imgphoto);
+        ambilgambar = root.findViewById(R.id.ambilgambar);
+        pg = root.findViewById(R.id.pg);
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
+        sessionManager = new SessionManager(getActivity());
+        StorageRef = FirebaseStorage.getInstance().getReference("uploads");
         if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-        if (getFromPref(getActivity(), ALLOW_KEY)) {
-            showSettingsAlert();
-        } else if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (
-                    ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                            Manifest.permission.CAMERA)) {
-                showAlert();
-            } else {
-                ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.CAMERA},
-                        MY_PERMISSIONS_REQUEST_CAMERA);
+            if (getFromPref(getActivity(), ALLOW_KEY)) {
+                showSettingsAlert();
+            } else if (ContextCompat.checkSelfPermission(getActivity(),
+                    Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                if (
+                        ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                Manifest.permission.CAMERA)) {
+                    showAlert();
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.CAMERA},
+                            MY_PERMISSIONS_REQUEST_CAMERA);
+                }
             }
         }
-    }
-    cek5();
-    FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(getActivity());
+        cek5();
+        FusedLocationProviderClient mFusedLocation = LocationServices.getFusedLocationProviderClient(getActivity());
         mFusedLocation.getLastLocation()
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-        @Override
-        public void onSuccess(Location location) {
-            // Got last known location. In some rare situations getActivity() can be null.
-            if (location != null) {
-                longtitude = String.valueOf(location.getLongitude() );
-                latitude = String.valueOf(location.getLatitude());
-                // Logic to handle location object
-            }
-        }
-    });
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some rare situations getActivity() can be null.
+                        if (location != null) {
+                            longtitude = String.valueOf(location.getLongitude());
+                            latitude = String.valueOf(location.getLatitude());
+                            // Logic to handle location object
+                        }
+                    }
+                });
         upload.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            upload.setEnabled(false);
-            pg.setVisibility(View.VISIBLE);
-            uploadFile(decoded);
-        }
-    });
+            @Override
+            public void onClick(View v) {
+                upload.setEnabled(false);
+                pg.setVisibility(View.VISIBLE);
+                uploadFile(decoded);
+            }
+        });
         ambilgambar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
 
-            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", getOutputMediaFile());
-            intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, fileUri);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivityForResult(intent, REQUEST_CAMERA);
-        }
-    });
+                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                try {
+                    fileUri = FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".fileprovider", getOutputMediaFile());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, fileUri);
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivityForResult(intent, REQUEST_CAMERA);
+            }
+        });
         return root;
-} 
- 
+    }
+
     private void cek5() {
         if (EasyPermissions.hasPermissions(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             upload.setEnabled(true);
@@ -202,23 +206,22 @@ public class DashboardFragment extends Fragment {
             EasyPermissions.requestPermissions(getActivity(), "Izinkan Aplikasi Mengakses Storage?", REQUEST_IMAGE2222, Manifest.permission.READ_EXTERNAL_STORAGE);
             upload.setEnabled(false);
         }
-
-
-
     }
 
-    private static File getOutputMediaFile() {
+    private static File getOutputMediaFile() throws IOException {
 
         mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "nakula");
 
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
                 Log.e("Monitoring", "Oops! Failed create Monitoring directory");
-                return null;
+                return mediaStorageDir;
             }
         }
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         mediaFile = new File(mediaStorageDir.getPath() + File.separator + "nakula" + timeStamp + ".jpg");
+
+        if (!mediaFile.exists()) mediaFile.createNewFile();
 
         return mediaFile;
     }
@@ -227,19 +230,18 @@ public class DashboardFragment extends Fragment {
 
         File file = mediaFile;
         Log.d("File", "" + file.getName());
-        Call<absen> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(),sessionManager.get_KODEKELAS(), longtitude,latitude, file.getName());
+        Call<absen> uploadGambar = mApiInterface.uploadGambar(sessionManager.get_ID_SISWA(), sessionManager.get_KODEKELAS(), longtitude, latitude, file.getName());
         uploadGambar.enqueue(new Callback<absen>() {
             @Override
             public void onResponse(Call<absen> call, Response<absen> response) {
                 upload.setEnabled(true);
                 pg.setVisibility(View.GONE);
-                Log.d(TAG, "onResponse: " +response);
-                if(response.code()== 200){
+                Log.d(TAG, "onResponse: " + response);
+                if (response.code() == 200) {
+                    Toast.makeText(getActivity(), response.body().getStatus().getMessage(), Toast.LENGTH_LONG).show();
+                } else {
 
-                    Toast.makeText(getActivity(),response.body().getStatus().getMessage(),Toast.LENGTH_LONG).show();
-                }else{
-
-                    Toast.makeText(getActivity(),"Belum Ada Jadwal",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Belum Ada Jadwal", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -280,8 +282,6 @@ public class DashboardFragment extends Fragment {
         alertDialog.show();
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -292,6 +292,7 @@ public class DashboardFragment extends Fragment {
                 try {
                     bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(fileUri));
                     imageView.setImageBitmap(bitmap);
+                    imageView.setVisibility(View.VISIBLE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -299,14 +300,6 @@ public class DashboardFragment extends Fragment {
 
         }
     }
-
-    private void setToImageView(Bitmap bmp){
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, bitmap_size, bytes);
-        decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(bytes.toByteArray()));
-        imageView.setImageBitmap(decoded);
-    }
-
     private void showAlert() {
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
         alertDialog.setTitle("Alert");
@@ -322,7 +315,6 @@ public class DashboardFragment extends Fragment {
 
         alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "ALLOW",
                 new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         ActivityCompat.requestPermissions(getActivity(),

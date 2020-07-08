@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="40dp"
+        android:visibility="gone"
         android:id="@+id/imageprofilchat"
         android:layout_height="40dp"
         android:src="@mipmap/ic_launcher"/>

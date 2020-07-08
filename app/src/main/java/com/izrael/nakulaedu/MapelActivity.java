@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.izrael.nakulaedu.adapter.MapelAdapter;
@@ -28,16 +30,22 @@ import retrofit2.Response;
 public class MapelActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     private List<MapelResult> results;
-    private MapelAdapter      nilaiAdapter;
-    ApiInterface   mApiInterface;
+    private MapelAdapter nilaiAdapter;
+    ApiInterface mApiInterface;
     SessionManager sessionManager;
     ShimmerFrameLayout shimmerFrameLayout;
     String stahun;
+
+    ImageView kosong;
+    TextView kosong2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapel);
         results = new ArrayList<>();
+        kosong = findViewById(R.id.kosong);
+        kosong2 = findViewById(R.id.kosong2);
         shimmerFrameLayout = findViewById(R.id.shimmer);
         shimmerFrameLayout.setVisibility(View.VISIBLE);
         shimmerFrameLayout.startShimmerAnimation();
@@ -48,20 +56,32 @@ public class MapelActivity extends AppCompatActivity {
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         ApiJadwal();
     }
+
     private void ApiJadwal() {
         Call<MapelClass> uploadGambar = mApiInterface.mapel(Integer.parseInt(sessionManager.get_KODEKELAS()));
         uploadGambar.enqueue(new Callback<MapelClass>() {
             @Override
             public void onResponse(Call<MapelClass> call, Response<MapelClass> response) {
                 assert response.body() != null;
+                if (response.code() == 200) {
 
-                results.addAll(response.body().getData());
+                    results.addAll(response.body().getData());
 
-                shimmerFrameLayout.setVisibility(View.GONE);
-                shimmerFrameLayout.stopShimmerAnimation();
-                nilaiAdapter = new MapelAdapter(MapelActivity.this, results);
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
+                    nilaiAdapter = new MapelAdapter(MapelActivity.this, results);
+                    if (results.size() > 0) {
 
-                recyclerView.setAdapter(nilaiAdapter);
+                        kosong.setVisibility(View.GONE);
+                        kosong2.setVisibility(View.GONE);
+                    }
+                    recyclerView.setAdapter(nilaiAdapter);
+
+                } else {
+
+                    shimmerFrameLayout.setVisibility(View.GONE);
+                    shimmerFrameLayout.stopShimmerAnimation();
+                }
 
             }
 

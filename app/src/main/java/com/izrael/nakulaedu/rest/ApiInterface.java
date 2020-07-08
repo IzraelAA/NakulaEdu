@@ -20,11 +20,18 @@ import com.izrael.nakulaedu.model.GetJadwal;
 import com.izrael.nakulaedu.model.GetTahun;
 import com.izrael.nakulaedu.model.absen;
 
+import java.util.Map;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 public interface ApiInterface {
 
@@ -94,6 +101,10 @@ public interface ApiInterface {
     Call<Raport> raport(
             @Field("id_siswa") int id_siswa
     );
+    @Multipart
+    @POST("uploadgambar")
+    Call<ResponseBody> uploadgambar(@Part MultipartBody.Part photo,
+                                    @PartMap Map<String,RequestBody> text);
     @FormUrlEncoded
     @POST("detailraport")
     Call<IdRaport> detailraport(

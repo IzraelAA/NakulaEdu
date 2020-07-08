@@ -13,6 +13,26 @@
         app:title="Materi"
         android:background="@drawable/gradianttoolbar"
         app:titleTextColor="#FFF"/>
+
+
+    <ImageView
+        android:id="@+id/kosong"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/loncat" />
+
+    <TextView
+        android:id="@+id/kosong2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-40dp"
+        android:gravity="center"
+        android:text="Belum Ada Materi"
+        android:textSize="20dp"
+        android:textStyle="bold" />
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"

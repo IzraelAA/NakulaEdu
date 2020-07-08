@@ -3,6 +3,7 @@ package com.izrael.nakulaedu.fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,6 +77,7 @@ public class usersFragment extends Fragment {
                     User user = snapshot.getValue(User.class);
                     assert user != null;
                     assert session.get_ID_SISWA() != null;
+                    Log.d("A", "onDataChange: "+session.get_ID_SISWA());
                     if (!user.getId().equals(session.get_ID_SISWA())) {
                         users.add(user);
                     }
