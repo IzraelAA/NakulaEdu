@@ -29,14 +29,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailMapelActivity extends AppCompatActivity {
-RecyclerView recyclerView;
+    RecyclerView recyclerView;
     String kode;
     private List<DataDetail> results;
-    private DataMapelAdapter      nilaiAdapter;
-    ApiInterface   mApiInterface;
+    private DataMapelAdapter nilaiAdapter;
+    ApiInterface mApiInterface;
     SessionManager sessionManager;
     ImageView kosong;
     TextView kosong2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,35 +45,36 @@ RecyclerView recyclerView;
         recyclerView = findViewById(R.id.materirecylerview);
         recyclerView.setHasFixedSize(true);
         Intent i = getIntent();
+        kode = i.getStringExtra("idmapel");
         kosong = findViewById(R.id.kosong);
         kosong2 = findViewById(R.id.kosong2);
-        results =new ArrayList<>();
-        kode = i.getStringExtra("idmapel");
+        results = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(DetailMapelActivity.this));
         sessionManager = new SessionManager(DetailMapelActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         ApiJadwal();
     }
+
     private void ApiJadwal() {
         Call<DetialMapel> uploadGambar = mApiInterface.materi(kode);
         uploadGambar.enqueue(new Callback<DetialMapel>() {
             @Override
             public void onResponse(Call<DetialMapel> call, Response<DetialMapel> response) {
                 assert response.body() != null;
-    if (response.code() == 200){
+                if (response.code() == 200) {
 
-        results.addAll(response.body().getData());
-        if (results.size() > 0) {
+                    results.addAll(response.body().getData());
+                    if (results.size() > 0) {
 
-            kosong.setVisibility(View.GONE);
-            kosong2.setVisibility(View.GONE);
-        }
-        nilaiAdapter = new DataMapelAdapter(DetailMapelActivity.this, results);
+                        kosong.setVisibility(View.GONE);
+                        kosong2.setVisibility(View.GONE);
+                    }
+                    nilaiAdapter = new DataMapelAdapter(DetailMapelActivity.this, results);
 
-        recyclerView.setAdapter(nilaiAdapter);
+                    recyclerView.setAdapter(nilaiAdapter);
 
-    }else{
-    }
+                } else {
+                }
 
 
             }

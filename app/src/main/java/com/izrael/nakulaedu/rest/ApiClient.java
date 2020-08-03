@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     //    private static final String BASE_URL = "http://192.168.1.101/gumukrejo/api/";
-    private static final String   BASE_URL = "https://testing.nakula.co.id/api/";
+    private static final String   BASE_URL = "https://admin.nakula.co.id/api/";
     private static       Retrofit retrofit = null;
 
 

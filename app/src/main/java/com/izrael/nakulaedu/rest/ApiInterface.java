@@ -1,11 +1,14 @@
 package com.izrael.nakulaedu.rest;
 
 
+import android.provider.MediaStore;
+
 import com.izrael.nakulaedu.classmodel.DataKantin;
 import com.izrael.nakulaedu.classmodel.DataNilai;
 import com.izrael.nakulaedu.classmodel.DataNotifikasi;
 import com.izrael.nakulaedu.classmodel.DataPembayaran;
 import com.izrael.nakulaedu.classmodel.DataQuiz;
+import com.izrael.nakulaedu.classmodel.DetailChat;
 import com.izrael.nakulaedu.classmodel.DetialMapel;
 import com.izrael.nakulaedu.classmodel.IdRaport;
 import com.izrael.nakulaedu.classmodel.Idnilai;
@@ -18,7 +21,11 @@ import com.izrael.nakulaedu.model.DefaultResponse;
 import com.izrael.nakulaedu.model.GetAuth;
 import com.izrael.nakulaedu.model.GetJadwal;
 import com.izrael.nakulaedu.model.GetTahun;
+import com.izrael.nakulaedu.model.NewChat;
+import com.izrael.nakulaedu.model.NewChatStatus;
 import com.izrael.nakulaedu.model.absen;
+import com.izrael.nakulaedu.model.pgquizdata;
+import com.izrael.nakulaedu.model.video;
 
 import java.util.Map;
 
@@ -36,6 +43,23 @@ import retrofit2.http.PartMap;
 public interface ApiInterface {
 
 
+    @Multipart
+    @POST("uploadabsensi")
+    Call<absen> uploadabasen(@Part MultipartBody.Part photo,
+                             @PartMap Map<String,RequestBody> text);
+    @Multipart
+    @POST("balas_chatfile")
+    Call<absen> balas_chatfile(@Part MultipartBody.Part photo,
+                             @PartMap Map<String,RequestBody> text);
+    @FormUrlEncoded
+    @POST("balas_chat")
+    Call<ResponseBody> chatkirim(
+            @Field("id_siswa") String id_siswa,
+            @Field("id_kelas") String id_kelas,
+            @Field("id_guru") String id_guru,
+            @Field("massage") String massage,
+            @Field("id_statuschat") String id_statuschat
+    );
     @FormUrlEncoded
     @POST("absensi")
     Call<absen> uploadGambar(
@@ -44,6 +68,18 @@ public interface ApiInterface {
             @Field("longtitude") String location,
             @Field("latitude") String latitude,
             @Field("gambar") String gambar
+    );
+
+
+    @FormUrlEncoded
+    @POST("jawaban_quiz")
+    Call<ResponseBody> jawaban_quiz(
+            @Field("id_dataquiz") String id_dataquiz,
+            @Field("id_kelas") String id_kelas,
+            @Field("jawaban") String jawaban,
+            @Field("id_quiz") String id_quiz,
+            @Field("id_siswa") String id_siswa,
+            @Field("nilai") String nilai
     );
 
     @FormUrlEncoded
@@ -56,6 +92,16 @@ public interface ApiInterface {
     @POST("data-nilai")
     Call<DataNilai> quiz(
             @Field("id_kelas") int id_kelas
+    );
+    @FormUrlEncoded
+    @POST("chat")
+    Call<NewChat> chat(
+            @Field("id_kelas") int id_kelas
+    );
+    @FormUrlEncoded
+    @POST("chat_status")
+    Call<DetailChat> chat_status(
+            @Field("id_statuschat") int id_statuschat
     );
 
     @FormUrlEncoded
@@ -71,6 +117,13 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("soal_quizpgnomer")
+    Call<pgquizdata> soal_quizpgnomer(
+            @Field("id_dataquiz") int id_dataquiz,
+            @Field("nomer") int nomer
+    );
+
+    @FormUrlEncoded
     @POST("jadwal")
     Call<GetJadwal> jadwal(
             @Field("id_kelas") int id_kelas
@@ -80,6 +133,12 @@ public interface ApiInterface {
     Call<GetJadwal> jadwalhari(
             @Field("id_kelas") int id_kelas,
             @Field("hari") String hari
+    );
+    @FormUrlEncoded
+    @POST("online")
+    Call<ResponseBody> online(
+            @Field("nis") String nis,
+            @Field("statussiswa") String statussiswa
     );
     @FormUrlEncoded
     @POST("pembayaran")
@@ -133,6 +192,11 @@ public interface ApiInterface {
     Call<Idnilai> nilai(
             @Field("id_datanilai") int id_datanilai,
             @Field("id_siswa") int id_siswa
+    );
+    @FormUrlEncoded
+    @POST("video")
+    Call<video> video(
+            @Field("id_kelas") int id_kelas
     );
 
     @FormUrlEncoded

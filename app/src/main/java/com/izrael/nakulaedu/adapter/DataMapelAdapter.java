@@ -15,6 +15,7 @@ import com.izrael.nakulaedu.DetailMapelActivity;
 import com.izrael.nakulaedu.IdQuizActivity;
 import com.izrael.nakulaedu.PelajaranActivity;
 import com.izrael.nakulaedu.R;
+import com.izrael.nakulaedu.VideoStreamingActivity;
 import com.izrael.nakulaedu.model.DataDetail;
 import com.izrael.nakulaedu.model.DataQuizUjian;
 
@@ -41,7 +42,7 @@ public class DataMapelAdapter extends RecyclerView.Adapter<DataMapelAdapter.View
     @Override
     public void onBindViewHolder(@NonNull final DataMapelAdapter.ViewHolder holder, int position) {
         final DataDetail quizUjian = list.get(position);
-        holder.type.setText("Pdf");
+        holder.type.setText(quizUjian.getExtension());
         holder.nama.setText(quizUjian.getNamaMateri());
         holder.masuk.setText(quizUjian.getJamMulai());
         holder.keluar.setText(quizUjian.getJamSelesai());
@@ -49,10 +50,17 @@ public class DataMapelAdapter extends RecyclerView.Adapter<DataMapelAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String cek = String.valueOf(quizUjian.getFile());
-                Intent intent = new Intent(holder.itemView.getContext(), PelajaranActivity.class);
-                intent.putExtra("file",cek);
-                holder.itemView.getContext().startActivity(intent);
+                if (quizUjian.getExtension().equals("pdf")){
+                    String cek = String.valueOf(quizUjian.getFile());
+                    Intent intent = new Intent(holder.itemView.getContext(), PelajaranActivity.class);
+                    intent.putExtra("file",cek);
+                    holder.itemView.getContext().startActivity(intent);
+                }else {
+                    String cek = String.valueOf(quizUjian.getFile());
+                    Intent intent = new Intent(holder.itemView.getContext(), VideoStreamingActivity.class);
+                    intent.putExtra("file",cek);
+                    holder.itemView.getContext().startActivity(intent);
+                }
             }
         });
     }

@@ -36,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PelajaranActivity extends AppCompatActivity implements DownloadFile.Listener {
-    String url = "https://testing.nakula.co.id/assets/materi/";
+    String url = "https://admin.nakula.co.id/assets/materi/";
     String kode, api;
     private List<Result> results;
     private JadwalPelajaraan nilaiAdapter;
@@ -59,11 +59,11 @@ public class PelajaranActivity extends AppCompatActivity implements DownloadFile
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pelajaran);
         root = findViewById(R.id.container);
-        Intent i = getIntent();
         pg = findViewById(R.id.pg);
         pg.setVisibility(View.VISIBLE);
-        kode = i.getStringExtra("file");
         results = new ArrayList<>();
+        Intent i = getIntent();
+        kode = i.getStringExtra("file");
         session = new SessionManager(PelajaranActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         ApiJadwal();

@@ -53,6 +53,7 @@ public class MapelAdapter extends RecyclerView.Adapter<MapelAdapter.ViewHolder> 
                 String cek = String.valueOf(MapelResult.getIdMapel());
                 Intent intent = new Intent(holder.itemView.getContext(), DetailMapelActivity.class);
                 intent.putExtra("idmapel",cek);
+
                 holder.itemView.getContext().startActivity(intent);
             }
         });

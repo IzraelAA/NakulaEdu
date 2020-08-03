@@ -37,6 +37,7 @@ import retrofit2.Response;
 public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> {
     List<Nilai>    list;
     Context        context;
+    int test;
     SessionManager sessionManager;
     private iddatanilaiadapter nilaiAdapter;
     private List<Iddatanilai> results;
@@ -57,7 +58,6 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull final NilaiAdapter.ViewHolder holder, int position) {
         final Nilai nilai = list.get(position);
-        results = new ArrayList<>();
         holder.nilai.setText( nilai.getNamaNilai());
         holder.guru.setText( nilai.getNamaGuru());
         holder.pelajaraan.setText( nilai.getNamaPelajaran());
@@ -67,14 +67,15 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent = new Intent(holder.itemView.getContext(), DetailNilaiActivity.class);
-//                intent.putExtra("idnilai",  nilai.getIdDatanilai());
+//
 //                intent.putExtra("namanilai",  nilai.getNamaNilai());
 //                intent.putExtra("namapelajaran",  nilai.getNamaPelajaran());
 //                intent.putExtra("guru",  nilai.getNamaGuru());
 //                holder.itemView.getContext().startActivity(intent);
 //                         }
 //        });
-        ApiList(holder,nilai.getIdDatanilai());
+        test = nilai.getIdDatanilai();
+        ApiList(holder,test);
     }
 
     @Override
@@ -96,9 +97,12 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
             recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext()));
         }
     }
-    private void ApiList(@NonNull final NilaiAdapter.ViewHolder holder,int datanilai)  {
-
-        Call<Idnilai> uploadGambar = mApiInterface.nilai(datanilai,Integer.parseInt(sessionManager.get_ID_SISWA()));
+    private void ApiList(@NonNull final NilaiAdapter.ViewHolder holder, final int datanilai)  {
+        results = null;
+        nilaiAdapter = null;
+        results = new ArrayList<>();
+        results.clear();
+        Call<Idnilai> uploadGambar = mApiInterface.nilai(test,Integer.parseInt(sessionManager.get_ID_SISWA()));
         uploadGambar.enqueue(new Callback<Idnilai>() {
             @Override
             public void onResponse(Call<Idnilai> call, Response<Idnilai> response) {
@@ -106,13 +110,12 @@ public class NilaiAdapter extends RecyclerView.Adapter<NilaiAdapter.ViewHolder> 
 
                 if (response.code() == 200 ){
 
+                    results.clear();
                     results.addAll(response.body().getData());
-
-                    Log.d("2", "onResponse: " + results.get(0).getNilai());
                     nilaiAdapter = new iddatanilaiadapter(holder.itemView.getContext(),results);
 
-                    Log.d("2", "onResponse: " +nilaiAdapter);
                     holder.recyclerView.setAdapter(nilaiAdapter);
+                    test = 0;
                 }
 
             }

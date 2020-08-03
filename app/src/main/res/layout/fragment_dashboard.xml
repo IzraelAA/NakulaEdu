@@ -42,7 +42,7 @@
         android:orientation="horizontal">
 
         <Button
-
+android:visibility="gone"
             android:id="@+id/upload"
             android:layout_width="138dp"
             android:layout_height="wrap_content"

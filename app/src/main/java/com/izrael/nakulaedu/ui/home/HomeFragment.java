@@ -1,7 +1,13 @@
 package com.izrael.nakulaedu.ui.home;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +19,7 @@ import android.widget.*;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -28,6 +35,7 @@ import com.izrael.nakulaedu.JadwalPelajaran;
 import com.izrael.nakulaedu.KantinActivity;
 import com.izrael.nakulaedu.MapelActivity;
 import com.izrael.nakulaedu.MenuchatActivity;
+import com.izrael.nakulaedu.NewChatActivity;
 import com.izrael.nakulaedu.NilaiActivity;
 import com.izrael.nakulaedu.NotifikasiActivity;
 import com.izrael.nakulaedu.ProfilSiswaActivity;
@@ -36,6 +44,7 @@ import com.izrael.nakulaedu.R;
 import com.izrael.nakulaedu.RaportActivity;
 import com.izrael.nakulaedu.SettingActivity;
 import com.izrael.nakulaedu.TagihanActivity;
+import com.izrael.nakulaedu.VideoActivity;
 import com.izrael.nakulaedu.adapter.DataQuizAdapter;
 import com.izrael.nakulaedu.adapter.JadwalHari;
 import com.izrael.nakulaedu.adapter.JadwalPelajaraan;
@@ -59,10 +68,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class HomeFragment extends Fragment {
 
@@ -75,7 +87,7 @@ public class HomeFragment extends Fragment {
     private JadwalHari jadwalhari;
     String[] name;
     String[] guru;
-    LinearLayout linearjadwal;
+    LinearLayout linearjadwal,linearselanjutnya;
     private List<DataQuizUjian> results;
     private List<JadwalResult> jadwal;
     private List<com.izrael.nakulaedu.model.notifikasi> results2;
@@ -97,6 +109,7 @@ public class HomeFragment extends Fragment {
         session = new SessionManager(getActivity());
         results = new ArrayList<>();
         linearjadwal = root.findViewById(R.id.linearjadwal);
+        linearselanjutnya = root.findViewById(R.id.selengkapnya);
         jadwal = new ArrayList<>();
         results2 = new ArrayList<>();
         recyclerjadwal = root.findViewById(R.id.jadwalrecyclerview);
@@ -116,6 +129,7 @@ public class HomeFragment extends Fragment {
         return root;
 
     }
+
 
     private void ApiJadwal(){
         Call<GetJadwal> uploadGambar = mApiInterface.jadwalhari(Integer.parseInt(session.get_KODEKELAS()),"hari");
@@ -157,8 +171,8 @@ public class HomeFragment extends Fragment {
                 assert response.body() != null;
                 results.addAll(response.body().getData());
 
-                nilaiAdapter = new DataQuizAdapter(getActivity(),results);
-
+                nilaiAdapter = new DataQuizAdapter(getActivity(),results,"home");
+                Log.d("TAG", "onResponddse: "+results.size());
                 recyclermapel.setAdapter(nilaiAdapter);
 
             }
@@ -184,7 +198,12 @@ public class HomeFragment extends Fragment {
                 results2.addAll(response.body().getData());
                String nomer = String.valueOf(results2.size());
                 notif.setText(nomer);
+                if(results2.size() > 0){
+                    Log.d("TAG", "onResponse: "+"hehehe");
+                   notifkan(nomer);
+                }else {
 
+                }
             }
             @Override
             public void onFailure(Call<DataNotifikasi> call, Throwable t) {
@@ -195,8 +214,47 @@ public class HomeFragment extends Fragment {
         });
 
     }
-    private void intent() {
 
+    private void notifkan(String nomer) {
+
+
+        String NOTIFICATION_CHANNEL_ID = "channel_androidnotif";
+        Context context = getActivity().getApplicationContext();
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            String channelName = "Android Notif Channel";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+
+            NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
+        Intent mIntent = new Intent(getActivity(), NotifikasiActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(), 0, mIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getActivity(),NOTIFICATION_CHANNEL_ID);
+        builder.setContentIntent(pendingIntent)
+                .setSmallIcon(R.drawable.logonakulaedu)
+                .setContentTitle("Nakula edu")
+                .setContentText("Anda Memiliki "+nomer+" notifikasi")
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_LIGHTS|Notification.DEFAULT_SOUND)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(115, builder.build());
+    }
+
+    private void intent() {
+        linearselanjutnya.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent in = new Intent(getActivity(), QuizActivity.class);
+                startActivity(in);
+            }
+        });
         raport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -232,18 +290,13 @@ public class HomeFragment extends Fragment {
         videconverence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getActivity().getPackageManager().getLaunchIntentForPackage("app.cybrook.teamlink") == null) {
-                    Toast.makeText(getActivity(), "Download Aplikasi TeamLink", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("app.cybrook.teamlink");
-                    startActivity(intent);
-                }
+                startActivity(new Intent(getActivity(), VideoActivity.class));
             }
         });
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MenuchatActivity.class));
+                startActivity(new Intent(getActivity(), NewChatActivity.class));
             }
         });
         mapel.setOnClickListener(new View.OnClickListener() {
@@ -283,9 +336,9 @@ public class HomeFragment extends Fragment {
 
     private void sp() {
         if (session.get_Foto().equals("default.png")) {
-            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(circleImageView);
+            Glide.with(this).load("https://admin.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(circleImageView);
         } else {
-            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(circleImageView);
+            Glide.with(this).load("https://admin.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(circleImageView);
         }
     }
 

@@ -88,7 +88,7 @@ public class IdQuizActivity extends AppCompatActivity {
 
                 shimmerFrameLayout.setVisibility(View.GONE);
                 shimmerFrameLayout.stopShimmerAnimation();
-                nilaiAdapter = new IdDataQuizAdapter(IdQuizActivity.this, results);
+                nilaiAdapter = new IdDataQuizAdapter(IdQuizActivity.this, results,sessionManager.get_KODEKELAS(),sessionManager.get_ID_SISWA());
 
                 recyclerView.setAdapter(nilaiAdapter);
 

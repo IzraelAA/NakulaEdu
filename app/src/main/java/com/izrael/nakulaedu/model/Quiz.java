@@ -16,10 +16,10 @@ public class Quiz {
     private String quiz;
     @SerializedName("file")
     @Expose
-    private Object file;
+    private String file;
     @SerializedName("tipe")
     @Expose
-    private Object tipe;
+    private String tipe;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -51,19 +51,19 @@ public class Quiz {
         this.quiz = quiz;
     }
 
-    public Object getFile() {
+    public String getFile() {
         return file;
     }
 
-    public void setFile(Object file) {
+    public void setFile(String file) {
         this.file = file;
     }
 
-    public Object getTipe() {
+    public String getTipe() {
         return tipe;
     }
 
-    public void setTipe(Object tipe) {
+    public void setTipe(String tipe) {
         this.tipe = tipe;
     }
 

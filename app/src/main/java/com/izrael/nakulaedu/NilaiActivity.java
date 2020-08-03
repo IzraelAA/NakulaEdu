@@ -86,26 +86,6 @@ public class NilaiActivity extends AppCompatActivity {
             }
         });
     }
-//
-//    private void AddList() {
-//    name = getResources().getStringArray(R.array.data_nama);
-//    guru = getResources().getStringArray(R.array.data_guru);
-//    nilai = getResources().getStringArray(R.array.data_nilai);
-//    }
-//
-//    private void ListAdd() {
-//        for (int i = 0; i < name.length; i++) {
-//            Nilai nilai2 = new Nilai();
-//            nilai2.setNama(name[i]);
-//            nilai2.setNilai(nilai[i]);
-//            nilai2.setPengajar(guru[i]);
-//            list.add(nilai2);
-//        }
-//        nilaiAdapter = new NilaiAdapter(NilaiActivity.this,list);
-//
-//        recyclerView.setAdapter(nilaiAdapter);
-//    }
-
 
 
 }

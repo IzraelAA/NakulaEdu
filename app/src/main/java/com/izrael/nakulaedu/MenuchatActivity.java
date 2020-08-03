@@ -53,7 +53,7 @@ public class MenuchatActivity extends AppCompatActivity {
         textView = findViewById(R.id.text);
         toolbartext = findViewById(R.id.text_profile);
         profile_image = findViewById(R.id.profile_image);
-        Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(profile_image);
+        Glide.with(this).load("https://admin.nakula.co.id/assets/foto_siswa/" + session.get_Foto()).into(profile_image);
 
         viewPager = findViewById(R.id.ViewPager);
         tabLayout = findViewById(R.id.tablayout_menu);
@@ -93,42 +93,9 @@ public class MenuchatActivity extends AppCompatActivity {
             }
         });
 
-//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
-//        reference.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                User user = dataSnapshot.getValue(User.class);
-//
-//                toolbartext.setText(user.getUsername());
-//                if (user.getImageUrl().equals("default")) {
-//                    profile_image.setImageResource(R.mipmap.ic_launcher);
-//                } else {
-//                    Glide.with(getApplicationContext()).load(user.getImageUrl()).into(profile_image);
-//                }
-//                Log.d("data", "" + user.getUsername());
-//            }
-//
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 
 
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.logout:
-//                FirebaseAuth.getInstance().signOut();
-//                startActivity(new Intent(Menu.this, Main2Activity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                return true;
-//        }
-//        return false;
-//    }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private ArrayList<Fragment> fragments;

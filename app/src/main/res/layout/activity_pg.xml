@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundbawah"
+
+    android:orientation="vertical"
+    tools:context=".PgActivity">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Soal Pilihan Ganda"
+            android:background="@drawable/gradianttoolbar"
+            app:titleTextColor="#FFF"/>
+    <TextView
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:id="@+id/soal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="1.Apa Itu Uang"/>
+    <RadioGroup
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/radio1"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/iya1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="a"/>
+        <RadioButton
+            android:id="@+id/iya2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="b"/>
+        <RadioButton
+            android:id="@+id/iya3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="c"/>
+        <RadioButton
+            android:id="@+id/iya4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="d"/>
+        <RadioButton
+            android:id="@+id/iya5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="e"/>
+    </RadioGroup>
+    <LinearLayout
+        android:layout_marginHorizontal="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/before"
+            android:background="@drawable/buttonback"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="wrap_content"
+            android:drawableLeft="@drawable/ic_baseline_navigate_before_24"
+            android:text="beck"
+            android:textColor="#FFF"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/next"
+            android:background="@drawable/buttonselanjutnya"
+            android:drawableRight="@drawable/ic_baseline_navigate_next_24"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:text="next"
+            android:textColor="#FFF"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

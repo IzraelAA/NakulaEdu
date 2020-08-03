@@ -65,7 +65,7 @@ public class QuizActivity extends AppCompatActivity {
 
                 shimmerFrameLayout.setVisibility(View.GONE);
                 shimmerFrameLayout.stopShimmerAnimation();
-                nilaiAdapter = new DataQuizAdapter(QuizActivity.this,results);
+                nilaiAdapter = new DataQuizAdapter(QuizActivity.this,results,"nohome");
 
                 recyclerView.setAdapter(nilaiAdapter);
 

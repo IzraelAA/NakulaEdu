@@ -42,7 +42,7 @@ public class KantinAdapter extends RecyclerView.Adapter<KantinAdapter.ViewHolder
         holder.nama.setText(jadwal.getNamaBarang());
         holder.harga.setText("harga : " + jadwal.getHarga());
         holder.deskripsi.setText("Deskripsi : " + jadwal.getDeskripsi());
-        Glide.with(holder.itemView.getContext()).load("https://testing.nakula.co.id/assets/foto/" + jadwal.getFile()).into(holder.foto);
+        Glide.with(holder.itemView.getContext()).load("https://admin.nakula.co.id/assets/foto/" + jadwal.getFile()).into(holder.foto);
     }
 
     @Override

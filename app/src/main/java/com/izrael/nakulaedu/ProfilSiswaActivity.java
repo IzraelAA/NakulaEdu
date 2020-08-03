@@ -49,9 +49,9 @@ public class ProfilSiswaActivity extends AppCompatActivity {
         update = findViewById(R.id.update);
         circleImageView = findViewById(R.id.circleImageView);
         if (session.get_Foto().equals("default.png")){
-            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
+            Glide.with(this).load("https://admin.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
         }else {
-            Glide.with(this).load("https://testing.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
+            Glide.with(this).load("https://admin.nakula.co.id/assets/foto_siswa/"+session.get_Foto()).into(circleImageView);
         }
 
         inputPassword.getEditText().setText(session.getpassword());

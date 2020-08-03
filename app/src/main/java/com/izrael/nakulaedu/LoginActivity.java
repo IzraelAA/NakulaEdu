@@ -47,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(LoginActivity.this);
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
         cek();
-        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+        if (EasyPermissions.hasPermissions(LoginActivity.this, Manifest.permission.CAMERA)) {
         } else {
-            EasyPermissions.requestPermissions(this, "Izinkan Aplikasi Mengakses Camera?", REQUEST_IMAGE, Manifest.permission.CAMERA);
+            EasyPermissions.requestPermissions(LoginActivity.this, "Izinkan Aplikasi Mengakses Camera?", REQUEST_IMAGE, Manifest.permission.CAMERA);
         }
         Login.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -8,15 +8,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,17 +21,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,24 +37,20 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.izrael.nakulaedu.AbsensiActivity;
 import com.izrael.nakulaedu.BuildConfig;
-import com.izrael.nakulaedu.Dashboard;
 import com.izrael.nakulaedu.R;
+import com.izrael.nakulaedu.UploadActivity;
 import com.izrael.nakulaedu.model.absen;
 import com.izrael.nakulaedu.rest.ApiClient;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,18 +71,16 @@ public class DashboardFragment extends Fragment {
     Bitmap bitmap, decoded;
     Uri fileUri;
     ApiInterface mApiInterface;
+    SessionManager sessionManager;
     String longtitude, latitude;
     int max_resolution_image = 200;
     Button upload, ambilgambar;
     public final static String BASE_URL = "http://siakad.nakula.co.id/";
     public static final int REQUEST_IMAGE = 120;
     public static final int REQUEST_IMAGE1 = 1210;
-    public static final int REQUEST_IMAGE111 = 1330;
-    public static final int REQUEST_IMAGE222 = 1450;
     public static final int REQUEST_IMAGE2222 = 14520;
     public final int REQUEST_CAMERA = 0;
     ProgressBar pg;
-    SessionManager sessionManager;
     private StorageReference StorageRef;
 
     public static Boolean getFromPref(Context context, String key) {
@@ -238,6 +225,7 @@ public class DashboardFragment extends Fragment {
                 pg.setVisibility(View.GONE);
                 Log.d(TAG, "onResponse: " + response);
                 if (response.code() == 200) {
+
                     Toast.makeText(getActivity(), response.body().getStatus().getMessage(), Toast.LENGTH_LONG).show();
                 } else {
 
@@ -290,9 +278,13 @@ public class DashboardFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 try {
-                    bitmap = BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(fileUri));
-                    imageView.setImageBitmap(bitmap);
-                    imageView.setVisibility(View.VISIBLE);
+                    String cek = String.valueOf(fileUri);
+                    Intent intent = new Intent(getActivity(), UploadActivity.class);
+                intent.putExtra("photo", cek);
+                intent.putExtra("cek", "absensi");
+                intent.putExtra("longtitude",  longtitude);
+                intent.putExtra("latitude",  latitude);
+                    getActivity().startActivity(intent);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

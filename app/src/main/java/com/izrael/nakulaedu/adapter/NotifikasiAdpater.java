@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.izrael.nakulaedu.R;
-import com.izrael.nakulaedu.model.Pembayaran;
 import com.izrael.nakulaedu.model.notifikasi;
 import com.izrael.nakulaedu.rest.ApiInterface;
 import com.izrael.nakulaedu.session.SessionManager;
@@ -19,7 +18,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NotifikasiAdpater  extends RecyclerView.Adapter<NotifikasiAdpater.ViewHolder> {
+public class NotifikasiAdpater extends RecyclerView.Adapter<NotifikasiAdpater.ViewHolder> {
     List<notifikasi> list;
     Context context;
     SessionManager sessionManager;

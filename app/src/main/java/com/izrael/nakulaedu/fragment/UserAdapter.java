@@ -47,7 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         final User user = users.get(position);
 
         holder.username.setText(user.getUsername());
-        Glide.with(holder.itemView.getContext()).load("https://testing.nakula.co.id/assets/foto_siswa/" + user.getImageUrl()).into(holder.imageView);
+        Glide.with(holder.itemView.getContext()).load("https://admin.nakula.co.id/assets/foto_siswa/" + user.getImageUrl()).into(holder.imageView);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

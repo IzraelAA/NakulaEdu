@@ -43,6 +43,9 @@ public class DataDetail {
     @SerializedName("id_mapel")
     @Expose
     private Integer idMapel;
+    @SerializedName("extension")
+    @Expose
+    private String extension;
     @SerializedName("nama_pelajaran")
     @Expose
     private String namaPelajaran;
@@ -182,6 +185,14 @@ public class DataDetail {
 
     public void setIdMapel(Integer idMapel) {
         this.idMapel = idMapel;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     public String getNamaPelajaran() {
